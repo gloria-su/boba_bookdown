@@ -1,18 +1,20 @@
+# Welcome 
+Welcome to the Bookdown repository for our statistical side project, An Analysis of Boba Yelp Reviews, a detailed report that accompanies the Xiaolongbao Repository. Below, we provide a structured overview of the contents and organization of the project.
 
-### Render the book (RStudio)
+# Structure:
+## Introduction (01):
+Overview of the Yelp Boba Analysis Project
+## Data (02):
+Process of web scrapping using Python with the Yelp Fusion API
+Data exploration visualizations and insights from the data
+## Methodology and Results (03):
+Statistical tests to test assumptions and insights from data exploration
+Application of statistical models to extract meaningful patterns
+## Recommendations and Conclusion (04):
+Interpretation of model outcomes and implications
+Recommendations for stakeholders or further research
 
-- [ ] 1. Install **bookdown** with `install.packages("bookdown")`. If you already have it, update to the most recent version.
+Feel free to explore the sections based on your interests or the specific information you are seeking. For an in-depth understanding of An Analysis of Boba Yelp Reviews, refer to the main Xiaolongbao Repository.
 
-- [ ] 2. Render locally with `bookdown::render_book("index.Rmd")` or clicking the *Build book* button which should appear in the Build tab (in the same pane as Environment, History, Connections, ...).
-
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).
-
-- [ ] 4. If it looks good, commit and push all changed files to GitHub. 
-
-(You will need to repeat steps 2 and 4 every time you wish to update the book online.)
-
-### Edit README	(GitHub or RStudio)
-
-Once you've completed these steps, delete the content of this **README** and add a short description of your project with a link to the book URL. It would be appreciated if you add the following to the end:	
 
 *This repo was initially generated from a bookdown template available here: https://github.com/jtr13/bookdown-template.*
