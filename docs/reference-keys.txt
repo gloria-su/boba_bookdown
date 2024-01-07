@@ -1,4 +1,13 @@
 introduction
 data
+data-extraction
+data-exploration
 methodology-and-results
+statistical-tests
+linear-regression-model
+predictive-random-forest-model
+visualization
 recommendations-and-conclusion
+conclusion
+recommendations
+acknowledgments

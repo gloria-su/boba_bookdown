@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Data | An Analysis of Boba Yelp Reviews</title>
-  <meta name="description" content="2 Data | An Analysis of Boba Yelp Reviews" />
+  <title>5 Acknowledgments | An Analysis of Boba Yelp Reviews</title>
+  <meta name="description" content="5 Acknowledgments | An Analysis of Boba Yelp Reviews" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Data | An Analysis of Boba Yelp Reviews" />
+  <meta property="og:title" content="5 Acknowledgments | An Analysis of Boba Yelp Reviews" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Data | An Analysis of Boba Yelp Reviews" />
+  <meta name="twitter:title" content="5 Acknowledgments | An Analysis of Boba Yelp Reviews" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="methodology-and-results.html"/>
+<link rel="prev" href="recommendations-and-conclusion.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -114,36 +114,23 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Utilizing Python and the pandas library, we initiated the web scraping process to compile our final dataset in the CSV format.</p>
-<div id="data-extraction" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Data Extraction<a href="data.html#data-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Our data extraction process began with leveraging the Yelp Fusion API, a tool that provides access to Yelp’s extensive global business directory. To initiate this process, we submitted a developer application for a private API key through the Yelp Fusion website. Fortunately, the acquisition of the API key was practically instantaneous, and the method to define the appropriate endpoint for our queries was fairly straightforward. More specifically, we used the ‘businesses search’ endpoint to search the Yelp database and retrieve information about businesses, including location, category, or keywords.</p>
-<p>However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba establishments. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and capping reviews per business at three.</p>
-<p>To optimize the efficiency of data retrieval from the API, we implemented a Yelp API wrapper obtained from the GitHub repository authored by <span class="citation">@gfairchild</span>. The Yelp API wrapper functioned as an intermediary layer, simplifying the communication process between our system and Yelp’s data services. By leveraging the wrapper, we were able to enhance the clarity of our code and simplify the technical intricacies associated with making requests directly to the API.</p>
-<p>Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis.Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. As such, we discarded variables where the number of null values exceeds 50% of the total number of values, such as price or wifi. We moved forward in our analysis with the variables listed below.</p>
-<p><em>INSERT DATA TABLE of final csv</em></p>
-<p>Each shop, which is also each Yelp entry, is designated with up to 3 tags. These include phrases like “Bubble Tea” or “Coffee Shop”. We filtered on the tag “Bubble Tea” to finish designating our data sets.</p>
-<p>Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the New York City (NYC) and Raleigh areas.</p>
-<p>This concluded the iterative process to achieve a final data set.</p>
-<p>After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder and week 11 RMD. Raleigh had n= 44 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. While the bolded variables formed the core of our analysis, additional variables like chain and authenticity were imputed by using external sources such as Google and our own expertise.</p>
-</div>
-<div id="data-exploration" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Data Exploration<a href="data.html#data-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Prior to analysis, we performed some exploratory data analysis in RStudio. One of the most thought-provoking visualizations we crafted was a boxplot comparing the ratings of boba shops in NYC and Raleigh, pictured below in Figure 1.
-*INSERT FINAL_BOXPLOT</p>
-<p>Contrary to our initial expectations, the boxplot revealed a notable trend: Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba. While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC.</p>
+<div id="acknowledgments" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Acknowledgments<a href="acknowledgments.html#acknowledgments" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Dr. Labarr</p>
+<p>Dr. Egan Warren</p>
+<p>Dr. Healey</p>
+<p>Tianyi Liu</p>
+<p>Yang Chen</p>
+<p><span class="citation">@gfairchild</span></p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="methodology-and-results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="recommendations-and-conclusion.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -174,7 +161,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/gloria-su/boba_bookdown/edit/main/02-data.Rmd",
+"link": "https://github.com/gloria-su/boba_bookdown/edit/main/05-acknowledgments.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -182,7 +169,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/gloria-su/boba_bookdown/blob/main/02-data.Rmd",
+"link": "https://github.com/gloria-su/boba_bookdown/blob/main/05-acknowledgments.Rmd",
 "text": null
 },
 "download": null,

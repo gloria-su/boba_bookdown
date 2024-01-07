@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Data | An Analysis of Boba Yelp Reviews</title>
-  <meta name="description" content="2 Data | An Analysis of Boba Yelp Reviews" />
+  <title>2 Data Extraction | An Analysis of Boba Yelp Reviews</title>
+  <meta name="description" content="2 Data Extraction | An Analysis of Boba Yelp Reviews" />
   <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Data | An Analysis of Boba Yelp Reviews" />
+  <meta property="og:title" content="2 Data Extraction | An Analysis of Boba Yelp Reviews" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Data | An Analysis of Boba Yelp Reviews" />
+  <meta name="twitter:title" content="2 Data Extraction | An Analysis of Boba Yelp Reviews" />
   
   
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="methodology-and-results.html"/>
+<link rel="next" href="data-exploration.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -76,25 +76,14 @@
 <li><a href="./">boba</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#data-extraction"><i class="fa fa-check"></i><b>2.1</b> Data Extraction</a></li>
-<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#data-exploration"><i class="fa fa-check"></i><b>2.2</b> Data Exploration</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.1</b> Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="methodology-and-results.html"><a href="methodology-and-results.html"><i class="fa fa-check"></i><b>3</b> Methodology and Results</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="methodology-and-results.html"><a href="methodology-and-results.html#statistical-tests"><i class="fa fa-check"></i><b>3.1</b> Statistical Tests</a></li>
-<li class="chapter" data-level="3.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#linear-regression-model"><i class="fa fa-check"></i><b>3.2</b> Linear Regression Model:</a></li>
-<li class="chapter" data-level="3.3" data-path="methodology-and-results.html"><a href="methodology-and-results.html#predictive-random-forest-model"><i class="fa fa-check"></i><b>3.3</b> Predictive Random Forest Model</a></li>
-<li class="chapter" data-level="3.4" data-path="methodology-and-results.html"><a href="methodology-and-results.html#visualization"><i class="fa fa-check"></i><b>3.4</b> Visualization:</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html"><i class="fa fa-check"></i><b>4</b> Recommendations and Conclusion</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#conclusion"><i class="fa fa-check"></i><b>4.1</b> Conclusion:</a></li>
-<li class="chapter" data-level="4.2" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#recommendations"><i class="fa fa-check"></i><b>4.2</b> Recommendations:</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>5</b> Acknowledgments</a></li>
+<li class="chapter" data-level="2" data-path="data-extraction.html"><a href="data-extraction.html"><i class="fa fa-check"></i><b>2</b> Data Extraction</a></li>
+<li class="chapter" data-level="3" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>3</b> Data Exploration</a></li>
+<li class="chapter" data-level="4" data-path="methodology-and-results.html"><a href="methodology-and-results.html"><i class="fa fa-check"></i><b>4</b> Methodology and Results</a></li>
+<li class="chapter" data-level="5" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html"><i class="fa fa-check"></i><b>5</b> Recommendations and Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -114,11 +103,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Utilizing Python and the pandas library, we initiated the web scraping process to compile our final dataset in the CSV format.</p>
-<div id="data-extraction" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Data Extraction<a href="data.html#data-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="data-extraction" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Data Extraction<a href="data-extraction.html#data-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Our data extraction process began with leveraging the Yelp Fusion API, a tool that provides access to Yelp’s extensive global business directory. To initiate this process, we submitted a developer application for a private API key through the Yelp Fusion website. Fortunately, the acquisition of the API key was practically instantaneous, and the method to define the appropriate endpoint for our queries was fairly straightforward. More specifically, we used the ‘businesses search’ endpoint to search the Yelp database and retrieve information about businesses, including location, category, or keywords.</p>
 <p>However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba establishments. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and capping reviews per business at three.</p>
 <p>To optimize the efficiency of data retrieval from the API, we implemented a Yelp API wrapper obtained from the GitHub repository authored by <span class="citation">@gfairchild</span>. The Yelp API wrapper functioned as an intermediary layer, simplifying the communication process between our system and Yelp’s data services. By leveraging the wrapper, we were able to enhance the clarity of our code and simplify the technical intricacies associated with making requests directly to the API.</p>
@@ -129,21 +115,13 @@
 <p>This concluded the iterative process to achieve a final data set.</p>
 <p>After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder and week 11 RMD. Raleigh had n= 44 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. While the bolded variables formed the core of our analysis, additional variables like chain and authenticity were imputed by using external sources such as Google and our own expertise.</p>
 </div>
-<div id="data-exploration" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Data Exploration<a href="data.html#data-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Prior to analysis, we performed some exploratory data analysis in RStudio. One of the most thought-provoking visualizations we crafted was a boxplot comparing the ratings of boba shops in NYC and Raleigh, pictured below in Figure 1.
-*INSERT FINAL_BOXPLOT</p>
-<p>Contrary to our initial expectations, the boxplot revealed a notable trend: Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba. While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC.</p>
-
-</div>
-</div>
             </section>
 
           </div>
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="methodology-and-results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-exploration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

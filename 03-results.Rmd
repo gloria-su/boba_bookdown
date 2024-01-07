@@ -1,1 +1,27 @@
 # Methodology and Results
+## Statistical Tests 
+Prior to conducting the statistical test, we had to check assumptions for normality, equal variance, and independence. Since we had a relatively small data set, we used the Shapiro-Wilk test to assess whether the shops are normally distributed and Levene's test for equality of variances (F-test) between shops in Raleigh and NYC. While the normality assumption did not hold (p= 3.81 x 10-4), we were able to confirm the equality of variances (p= 0.81). For the independence assumption, we assumed each shop was independent; however, we created a feature called “chain” that provided a binary flag if a shop had multiple locations. 
+
+Thus, we performed Welch’s 2 sample t-test on the two different groups. We found that boba shops in Raleigh were significantly different from boba shops in NYC, with a p-value of 4e-03. All statistical tests utilized a significance level (alpha) of 0.05. The mean rating of shops in Raleigh was 4.16 (variance 0.32), while the mean rating in NYC was 3.84 (variance 0.35). This resulted in a difference in means of 0.35, as seen in Figure 1 in the previous section.
+
+With our intial hypothesis confirmed by the statistically significant difference, our focus shifted to a more detailed comparison of boba shops in Raleigh and NYC. We ran both a linear regression model for explainability and a predictive random forest model to find predictors of boba shop ratings.
+
+## Linear Regression Model:
+We built two different variable selection models with rating as the target variable using stepwise regression. After setting a full model and an empty model separately for the Raleigh and New York City datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations. 
+
+The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.
+
+## Predictive Random Forest Model
+While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE) should the variable be deleted.
+The plot of variable importance is displayed in Figure 2.
+*INSERT VARIABLE IMPORTANCE PLOT*
+
+Figure 3: Variables ranked by percent increase in MSE for shops in Raleigh
+
+The city feature was important in both Raleigh and NYC appearance of the city in both models as a variable in higher importance meant that it was important. We decided to create maps in Tableau to visualize the distribution of boba shops in Raleigh and NYC
+
+## Visualization:
+We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature cities in the data set indicated that Raleigh’s n = 44 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating that there was a gap in features between locations.
+
+The random forest model confirmed that the cities feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.
+

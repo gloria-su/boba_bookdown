@@ -77,9 +77,24 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a></li>
-<li class="chapter" data-level="3" data-path="methodology-and-results.html"><a href="methodology-and-results.html"><i class="fa fa-check"></i><b>3</b> Methodology and Results</a></li>
-<li class="chapter" data-level="4" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html"><i class="fa fa-check"></i><b>4</b> Recommendations and Conclusion</a></li>
+<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#data-extraction"><i class="fa fa-check"></i><b>2.1</b> Data Extraction</a></li>
+<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#data-exploration"><i class="fa fa-check"></i><b>2.2</b> Data Exploration</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="methodology-and-results.html"><a href="methodology-and-results.html"><i class="fa fa-check"></i><b>3</b> Methodology and Results</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="methodology-and-results.html"><a href="methodology-and-results.html#statistical-tests"><i class="fa fa-check"></i><b>3.1</b> Statistical Tests</a></li>
+<li class="chapter" data-level="3.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#linear-regression-model"><i class="fa fa-check"></i><b>3.2</b> Linear Regression Model:</a></li>
+<li class="chapter" data-level="3.3" data-path="methodology-and-results.html"><a href="methodology-and-results.html#predictive-random-forest-model"><i class="fa fa-check"></i><b>3.3</b> Predictive Random Forest Model</a></li>
+<li class="chapter" data-level="3.4" data-path="methodology-and-results.html"><a href="methodology-and-results.html#visualization"><i class="fa fa-check"></i><b>3.4</b> Visualization:</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html"><i class="fa fa-check"></i><b>4</b> Recommendations and Conclusion</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#conclusion"><i class="fa fa-check"></i><b>4.1</b> Conclusion:</a></li>
+<li class="chapter" data-level="4.2" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#recommendations"><i class="fa fa-check"></i><b>4.2</b> Recommendations:</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>5</b> Acknowledgments</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -101,7 +116,31 @@
             <section class="normal" id="section-">
 <div id="methodology-and-results" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> Methodology and Results<a href="methodology-and-results.html#methodology-and-results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="statistical-tests" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Statistical Tests<a href="methodology-and-results.html#statistical-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Prior to conducting the statistical test, we had to check assumptions for normality, equal variance, and independence. Since we had a relatively small data set, we used the Shapiro-Wilk test to assess whether the shops are normally distributed and Levene’s test for equality of variances (F-test) between shops in Raleigh and NYC. While the normality assumption did not hold (p= 3.81 x 10-4), we were able to confirm the equality of variances (p= 0.81). For the independence assumption, we assumed each shop was independent; however, we created a feature called “chain” that provided a binary flag if a shop had multiple locations.</p>
+<p>Thus, we performed Welch’s 2 sample t-test on the two different groups. We found that boba shops in Raleigh were significantly different from boba shops in NYC, with a p-value of 4e-03. All statistical tests utilized a significance level (alpha) of 0.05. The mean rating of shops in Raleigh was 4.16 (variance 0.32), while the mean rating in NYC was 3.84 (variance 0.35). This resulted in a difference in means of 0.35, as seen in Figure 1 in the previous section.</p>
+<p>With our intial hypothesis confirmed by the statistically significant difference, our focus shifted to a more detailed comparison of boba shops in Raleigh and NYC. We ran both a linear regression model for explainability and a predictive random forest model to find predictors of boba shop ratings.</p>
+</div>
+<div id="linear-regression-model" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Linear Regression Model:<a href="methodology-and-results.html#linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We built two different variable selection models with rating as the target variable using stepwise regression. After setting a full model and an empty model separately for the Raleigh and New York City datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations.</p>
+<p>The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.</p>
+</div>
+<div id="predictive-random-forest-model" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Predictive Random Forest Model<a href="methodology-and-results.html#predictive-random-forest-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE) should the variable be deleted.
+The plot of variable importance is displayed in Figure 2.
+<em>INSERT VARIABLE IMPORTANCE PLOT</em></p>
+<p>Figure 3: Variables ranked by percent increase in MSE for shops in Raleigh</p>
+<p>The city feature was important in both Raleigh and NYC appearance of the city in both models as a variable in higher importance meant that it was important. We decided to create maps in Tableau to visualize the distribution of boba shops in Raleigh and NYC</p>
+</div>
+<div id="visualization" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Visualization:<a href="methodology-and-results.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature cities in the data set indicated that Raleigh’s n = 44 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating that there was a gap in features between locations.</p>
+<p>The random forest model confirmed that the cities feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.</p>
 
+</div>
 </div>
             </section>
 
