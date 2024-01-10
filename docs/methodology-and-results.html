@@ -23,7 +23,7 @@
 <meta name="author" content="Violet Evans and Gloria Su" />
 
 
-<meta name="date" content="2024-01-06" />
+<meta name="date" content="2024-01-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -85,14 +85,14 @@
 <li class="chapter" data-level="3" data-path="methodology-and-results.html"><a href="methodology-and-results.html"><i class="fa fa-check"></i><b>3</b> Methodology and Results</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="methodology-and-results.html"><a href="methodology-and-results.html#statistical-tests"><i class="fa fa-check"></i><b>3.1</b> Statistical Tests</a></li>
-<li class="chapter" data-level="3.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#linear-regression-model"><i class="fa fa-check"></i><b>3.2</b> Linear Regression Model:</a></li>
+<li class="chapter" data-level="3.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#linear-regression-model"><i class="fa fa-check"></i><b>3.2</b> Linear Regression Model</a></li>
 <li class="chapter" data-level="3.3" data-path="methodology-and-results.html"><a href="methodology-and-results.html#predictive-random-forest-model"><i class="fa fa-check"></i><b>3.3</b> Predictive Random Forest Model</a></li>
-<li class="chapter" data-level="3.4" data-path="methodology-and-results.html"><a href="methodology-and-results.html#visualization"><i class="fa fa-check"></i><b>3.4</b> Visualization:</a></li>
+<li class="chapter" data-level="3.4" data-path="methodology-and-results.html"><a href="methodology-and-results.html#visualization"><i class="fa fa-check"></i><b>3.4</b> Visualization</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html"><i class="fa fa-check"></i><b>4</b> Recommendations and Conclusion</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#conclusion"><i class="fa fa-check"></i><b>4.1</b> Conclusion:</a></li>
-<li class="chapter" data-level="4.2" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#recommendations"><i class="fa fa-check"></i><b>4.2</b> Recommendations:</a></li>
+<li class="chapter" data-level="4.1" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#conclusion"><i class="fa fa-check"></i><b>4.1</b> Conclusion</a></li>
+<li class="chapter" data-level="4.2" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#recommendations"><i class="fa fa-check"></i><b>4.2</b> Recommendations</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>5</b> Acknowledgments</a></li>
 <li class="divider"></li>
@@ -123,22 +123,23 @@
 <p>With our intial hypothesis confirmed by the statistically significant difference, our focus shifted to a more detailed comparison of boba shops in Raleigh and NYC. We ran both a linear regression model for explainability and a predictive random forest model to find predictors of boba shop ratings.</p>
 </div>
 <div id="linear-regression-model" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Linear Regression Model:<a href="methodology-and-results.html#linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">3.2</span> Linear Regression Model<a href="methodology-and-results.html#linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We built two different variable selection models with rating as the target variable using stepwise regression. After setting a full model and an empty model separately for the Raleigh and New York City datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations.</p>
+<p>#Raleigh Variable Selection</p>
 <p>The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.</p>
 </div>
 <div id="predictive-random-forest-model" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Predictive Random Forest Model<a href="methodology-and-results.html#predictive-random-forest-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE) should the variable be deleted.
-The plot of variable importance is displayed in Figure 2.
-<em>INSERT VARIABLE IMPORTANCE PLOT</em></p>
+<p>While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE) should the variable be deleted.</p>
+<p>The NYC plot of variable importance is displayed below.</p>
+<p>The Raleigh plot of variable importance is displayed below.</p>
 <p>Figure 3: Variables ranked by percent increase in MSE for shops in Raleigh</p>
-<p>The city feature was important in both Raleigh and NYC appearance of the city in both models as a variable in higher importance meant that it was important. We decided to create maps in Tableau to visualize the distribution of boba shops in Raleigh and NYC</p>
+<p><em>explain visual output</em>
+The “city” variable was important in both NYC and Raleigh variable importance outputs from our random forests. This output inspired us to visualize our data set and see the map of boba shops for both data sets.</p>
 </div>
 <div id="visualization" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Visualization:<a href="methodology-and-results.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature cities in the data set indicated that Raleigh’s n = 44 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating that there was a gap in features between locations.</p>
-<p>The random forest model confirmed that the cities feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.</p>
+<h2><span class="header-section-number">3.4</span> Visualization<a href="methodology-and-results.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We utilized the interactive dashboard platform Tableau to display both NYC and Raleigh boba shops by longitude and latitude. The “city” variable indicated that Raleigh’s n = 44 boba shops spanned 9 “cities”, while NYC’s n = 70 boba shops spanned 10 “cities”. We found that shops in NYC tended to be more concentrated and in closer proximity to each other than shops in Raleigh, indicating fiercer competition outcomes within the NYC data set. The visualization reflected the same results from the variable selection model and the predictive random forest model above.</p>
 
 </div>
 </div>

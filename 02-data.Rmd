@@ -1,5 +1,5 @@
 # Data
-Utilizing Python and the pandas library, we initiated the web scraping process to compile our final dataset in the CSV format. 
+Utilizing Python and the Pandas library, we initiated the web scraping process to compile our final data set in the CSV format. 
 
 ## Data Extraction
 
@@ -9,21 +9,48 @@ However, our interaction with the Yelp Fusion API was not without limitations. N
 
 To optimize the efficiency of data retrieval from the API, we implemented a Yelp API wrapper obtained from the GitHub repository authored by @gfairchild. The Yelp API wrapper functioned as an intermediary layer, simplifying the communication process between our system and Yelp's data services. By leveraging the wrapper, we were able to enhance the clarity of our code and simplify the technical intricacies associated with making requests directly to the API.
 
-Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis.Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. As such, we discarded variables where the number of null values exceeds 50% of the total number of values, such as price or wifi. We moved forward in our analysis with the variables listed below.
+Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis. Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. We chose to move forward by discarding variables where the number of null values exceeds 50% of the total number of values and omitted the price and wifi variables given from Yelp. We moved forward in our analysis with the variables listed below.
 
-*INSERT DATA TABLE of final csv*
+```{r, include=FALSE}
+boba <- read.csv("~/boba/Data/final_all.csv")
+head(boba)
+```
 
-Each shop, which is also each Yelp entry, is designated with up to 3 tags. These include phrases like “Bubble Tea” or “Coffee Shop”. We filtered on the tag “Bubble Tea” to finish designating our data sets.
+Each shop, which is also each Yelp entry, is designated with up to 3 tags. These include phrases like “Bubble Tea” or “Coffee Shop”. We filtered on the tag “Bubble Tea” to finish designating our data sets for both Raleigh and New York City (NYC). The source variable attaches each shop to a location.
 
-Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the New York City (NYC) and Raleigh areas.
+Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the NYC and Raleigh areas.
 
-This concluded the iterative process to achieve a final data set.
- 
-After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder and week 11 RMD. Raleigh had n= 44 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. While the bolded variables formed the core of our analysis, additional variables like chain and authenticity were imputed by using external sources such as Google and our own expertise.
+This concluded the iterative process to achieve a final data set. Below is a snippet of the data table with binary indicator variables for each category.
+```{r, include=FALSE}
+boba2 <- read.csv("~/boba/Data/slide_final.csv")
+head(boba2)
+```
+
+After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder of the Xiaolongbao respository under the week 11 RMD. Raleigh had n= 44 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. The following variables formed the core of our analysis:
+
+ - Name 
+
+ - Rating
+
+ - City
+
+ - Categories
+
+ - Review Count
+
+ - Source
+
+Additional variables like chain, authenticity, and restaurant were imputed by using external sources such as Google and our own expertise.
 
 ## Data Exploration
 Prior to analysis, we performed some exploratory data analysis in RStudio. One of the most thought-provoking visualizations we crafted was a boxplot comparing the ratings of boba shops in NYC and Raleigh, pictured below in Figure 1. 
-*INSERT FINAL_BOXPLOT
 
-Contrary to our initial expectations, the boxplot revealed a notable trend: Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba. While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC.
+```{r, include=FALSE}
+library("ggplot2")
+
+boxplot(Rating~as.factor(source),data=boba2, main="Rating Distribution",
+   xlab="Location", ylab="Rating (1-5)", names=c("NYC","Raleigh"))
+```
+
+Contrary to our initial expectations, the boxplot revealed a notable trend: Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba. While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted section 3. 
 
