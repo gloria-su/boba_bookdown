@@ -7,25 +7,7 @@ Thus, we performed Welch’s 2 sample t-test on the two different groups. We fou
 With our intial hypothesis confirmed by the statistically significant difference, our focus shifted to a more detailed comparison of boba shops in Raleigh and NYC. We decided to approach the problem with both an explanatory and predictive approach, running both a linear regression model for explainability and a predictive random forest model to find predictors of boba shop ratings.
 
 ## Linear Regression Model
-We built two different variable selection models with rating as the target variable using stepwise regression. After setting a full model and an empty model separately for the Raleigh and New York City datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations. 
-
-The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.
-
-```{r, eval=FALSE, include=FALSE}
-#import library
-library("tidyverse")
-#filter to only NYC variable selection
-nyc_df <- boba2[boba2$source=="nyc_boba",]
-
-nyc_df[, c(9:30)] <- lapply(nyc_df[, c(9:30)], function(col) factor(col))
-#Rating should be numeric
-nyc_df$Rating <- as.numeric(nyc_df$Rating)
-#Do forward selection for the columns that explain rating
-full.model.nyc <- lm(Rating ~  ., data = nyc_df[,c(3, 11:30)])
-empty.model.nyc <- lm(Rating ~ 1, data = nyc_df[,c(2,9:30)])
-for.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "forward", k = 2)
-step.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "both", k = 2) 
-```
+To utilize an explanatory approach, we built two different variable selection models with rating as the target variable using stepwise regression. One model was for Raleigh while the other model was for New York City. After setting a full model and an empty model separately for the Raleigh and NYC datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations. The following code chunks display the stepwise selection code.
 
 #Raleigh Variable Selection 
 ```{r, include=FALSE, eval=FALSE}
@@ -45,28 +27,29 @@ for.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper =
 step.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper = full.model), direction = "both", k = 2) 
 ```
 
+#NYC Variable Selection
+```{r, eval=FALSE, include=FALSE}
+#import library
+library("tidyverse")
+#filter to only NYC variable selection
+nyc_df <- boba2[boba2$source=="nyc_boba",]
+
+nyc_df[, c(9:30)] <- lapply(nyc_df[, c(9:30)], function(col) factor(col))
+#Rating should be numeric
+nyc_df$Rating <- as.numeric(nyc_df$Rating)
+#Do forward selection for the columns that explain rating
+full.model.nyc <- lm(Rating ~  ., data = nyc_df[,c(3, 11:30)])
+empty.model.nyc <- lm(Rating ~ 1, data = nyc_df[,c(2,9:30)])
+for.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "forward", k = 2)
+step.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "both", k = 2) 
+```
+
 The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.
 
 ## Predictive Random Forest Model
 While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE). We assessed the variable importance of our predictive model output with a variable called “random”, seen in the plot of variable importance for NYC and Raleigh below.
 
-The NYC plot of variable importance is displayed below.
-
-```{r, eval=FALSE, include=FALSE}
-#import library
-library(randomForest)
-#Run a random forest model for NYC
-nyc_df <- as.data.frame(nyc_df)
-nyc_df$random<- rnorm(70)
-set.seed(12345)
-rf.nyc <- randomForest(Rating ~ ., data = nyc_df, ntree = 250, importance = TRUE)
-varImpPlot(rf.nyc,
-           sort = TRUE,
-           n.var = 10,
-           main = "Top 10 - Variable Importance for NYC", type = 1)
-```
-
-The Raleigh plot of variable importance is displayed below.
+### The Raleigh plot of variable importance is displayed below:
 ```{r, eval=FALSE, include=FALSE}
 #import library
 library(randomForest)
@@ -80,12 +63,34 @@ varImpPlot(rf.raleigh ,
            n.var = 10,
            main = "Top 10 - Variable Importance for Raleigh", type = 1)
 ```
+The top important variables for the predictive model in Raleigh were similar to the linear regression model. Of the five explanatory variables of the linear regression (juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator), four appeared before the random variable. A high overlap between explanatory and predictor variables allows us to infer that there are similar variables that go into forming and retaining a good Raleigh boba shop. These include:
+- Having a variety of options, such as smoothies and juices.
+- Appealing to the “fusion” audience rather than as an authentic boba shop.
+- Location.
+- Having food options, such as baked goods.
+- Being tagged as a tea room.
 
-Figure 3: Variables ranked by percent increase in MSE for shops in Raleigh
+### The NYC plot of variable importance is displayed below:
+```{r, eval=FALSE, include=FALSE}
+#import library
+library(randomForest)
+#Run a random forest model for NYC
+nyc_df <- as.data.frame(nyc_df)
+nyc_df$random<- rnorm(70)
+set.seed(12345)
+rf.nyc <- randomForest(Rating ~ ., data = nyc_df, ntree = 250, importance = TRUE)
+varImpPlot(rf.nyc,
+           sort = TRUE,
+           n.var = 10,
+           main = "Top 10 - Variable Importance for NYC", type = 1)
+```
+The top importance variables output from the random forest for New York City seemed to focus on location and authenticity, seen in the “longitude”, “city”, and “authenticity” variables. The custom cakes indicator also appeared before our random variable.
 
-*explain visual output*
-The "city" variable was important in both NYC and Raleigh variable importance outputs from our random forests. This output inspired us to visualize our data set and see the map of boba shops for both data sets.
+It’s important to note that the “city” variable was important in both the NYC and Raleigh variable importance outputs from our random forests; this may indicate that the shop’s location is a large factor in a Yelp rating. This output inspired us to visualize our data set and see the map of boba shops for both data sets.
 
 ## Visualization
-We utilized the interactive dashboard platform Tableau to display both NYC and Raleigh boba shops by longitude and latitude. The "city" variable indicated that Raleigh’s n = 44 boba shops spanned 9 "cities", while NYC’s n = 70 boba shops spanned 10 "cities". We found that shops in NYC tended to be more concentrated and in closer proximity to each other than shops in Raleigh, indicating fiercer competition outcomes within the NYC data set. The visualization reflected the same results from the variable selection model and the predictive random forest model above. 
+We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature cities in the data set indicated that Raleigh’s n = 44 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating that there was a gap in features between locations.
+
+The random forest model confirmed that the cities feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.
+
 
