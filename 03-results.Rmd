@@ -9,7 +9,7 @@ With our intial hypothesis confirmed by the statistically significant difference
 ## Linear Regression Model
 To utilize an explanatory approach, we built two different variable selection models with rating as the target variable using stepwise regression. One model was for Raleigh while the other model was for New York City. After setting a full model and an empty model separately for the Raleigh and NYC datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations. The following code chunks display the stepwise selection code.
 
-#Raleigh Variable Selection 
+### Raleigh Variable Selection 
 ```{r, include=FALSE, eval=FALSE}
 #import library
 library("tidyverse")
@@ -27,7 +27,7 @@ for.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper =
 step.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper = full.model), direction = "both", k = 2) 
 ```
 
-#NYC Variable Selection
+### NYC Variable Selection
 ```{r, eval=FALSE, include=FALSE}
 #import library
 library("tidyverse")
