@@ -21,7 +21,7 @@ Each shop, which is also each Yelp entry, is designated with up to 3 tags. These
 Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the NYC and Raleigh areas.
 
 This concluded the iterative process to achieve a final data set. Below is a snippet of the data table with binary indicator variables for each category.
-```{r, include=FALSE}
+```{r, echo=FALSE}
 boba2 <- read.csv("~/boba/Data/slide_final.csv")
 head(boba2)
 ```
@@ -45,7 +45,7 @@ Additional variables like chain, authenticity, and restaurant were imputed by us
 ## Data Exploration
 Prior to analysis, we performed some exploratory data analysis in RStudio. One of the most thought-provoking visualizations we crafted was a boxplot comparing the ratings of boba shops in NYC and Raleigh, pictured below in Figure 1. 
 
-```{r, include=FALSE}
+```{r, echo=FALSE}
 library("ggplot2")
 
 boxplot(Rating~as.factor(source),data=boba2, main="Rating Distribution",

@@ -1,6 +1,7 @@
 # Recommendations and Conclusion
 ## Conclusion
 The boxplot created questions around two main takeaways from our project: 
+
  - The mean ratings across NYC and Raleigh.
 
  - Variable importance from the linear regression model and random forest model.

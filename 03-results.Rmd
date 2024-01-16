@@ -9,6 +9,8 @@ With our intial hypothesis confirmed by the statistically significant difference
 ## Linear Regression Model
 We built two different variable selection models with rating as the target variable using stepwise regression. After setting a full model and an empty model separately for the Raleigh and New York City datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations. 
 
+The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.
+
 ```{r, eval=FALSE, include=FALSE}
 #import library
 library("tidyverse")
@@ -19,7 +21,7 @@ nyc_df[, c(9:30)] <- lapply(nyc_df[, c(9:30)], function(col) factor(col))
 #Rating should be numeric
 nyc_df$Rating <- as.numeric(nyc_df$Rating)
 #Do forward selection for the columns that explain rating
-full.model.nyc <- lm(Rating ~  ., data = nyc_df[,c(2, 9:30)])
+full.model.nyc <- lm(Rating ~  ., data = nyc_df[,c(3, 11:30)])
 empty.model.nyc <- lm(Rating ~ 1, data = nyc_df[,c(2,9:30)])
 for.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "forward", k = 2)
 step.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "both", k = 2) 
@@ -46,9 +48,10 @@ step.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper 
 The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.
 
 ## Predictive Random Forest Model
-While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE) should the variable be deleted.
+While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE). We assessed the variable importance of our predictive model output with a variable called “random”, seen in the plot of variable importance for NYC and Raleigh below.
 
 The NYC plot of variable importance is displayed below.
+
 ```{r, eval=FALSE, include=FALSE}
 #import library
 library(randomForest)
