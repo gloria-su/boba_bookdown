@@ -1,0 +1,17 @@
+introduction
+data
+data-extraction
+data-exploration
+methodology-and-results
+statistical-tests
+linear-regression-model
+raleigh-variable-selection
+nyc-variable-selection
+predictive-random-forest-model
+the-raleigh-plot-of-variable-importance-is-displayed-below
+the-nyc-plot-of-variable-importance-is-displayed-below
+visualization
+conclusion-and-recommendations
+findings
+next-steps
+acknowledgments

@@ -23,7 +23,7 @@
 <meta name="author" content="Violet Evans and Gloria Su" />
 
 
-<meta name="date" content="2024-01-15" />
+<meta name="date" content="2024-01-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -85,14 +85,22 @@
 <li class="chapter" data-level="3" data-path="methodology-and-results.html"><a href="methodology-and-results.html"><i class="fa fa-check"></i><b>3</b> Methodology and Results</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="methodology-and-results.html"><a href="methodology-and-results.html#statistical-tests"><i class="fa fa-check"></i><b>3.1</b> Statistical Tests</a></li>
-<li class="chapter" data-level="3.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#linear-regression-model"><i class="fa fa-check"></i><b>3.2</b> Linear Regression Model</a></li>
-<li class="chapter" data-level="3.3" data-path="methodology-and-results.html"><a href="methodology-and-results.html#predictive-random-forest-model"><i class="fa fa-check"></i><b>3.3</b> Predictive Random Forest Model</a></li>
+<li class="chapter" data-level="3.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#linear-regression-model"><i class="fa fa-check"></i><b>3.2</b> Linear Regression Model</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="methodology-and-results.html"><a href="methodology-and-results.html#raleigh-variable-selection"><i class="fa fa-check"></i><b>3.2.1</b> Raleigh Variable Selection</a></li>
+<li class="chapter" data-level="3.2.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#nyc-variable-selection"><i class="fa fa-check"></i><b>3.2.2</b> NYC Variable Selection</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="methodology-and-results.html"><a href="methodology-and-results.html#predictive-random-forest-model"><i class="fa fa-check"></i><b>3.3</b> Predictive Random Forest Model</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="methodology-and-results.html"><a href="methodology-and-results.html#the-raleigh-plot-of-variable-importance-is-displayed-below"><i class="fa fa-check"></i><b>3.3.1</b> The Raleigh plot of variable importance is displayed below:</a></li>
+<li class="chapter" data-level="3.3.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#the-nyc-plot-of-variable-importance-is-displayed-below"><i class="fa fa-check"></i><b>3.3.2</b> The NYC plot of variable importance is displayed below:</a></li>
+</ul></li>
 <li class="chapter" data-level="3.4" data-path="methodology-and-results.html"><a href="methodology-and-results.html#visualization"><i class="fa fa-check"></i><b>3.4</b> Visualization</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html"><i class="fa fa-check"></i><b>4</b> Recommendations and Conclusion</a>
+<li class="chapter" data-level="4" data-path="conclusion-and-recommendations.html"><a href="conclusion-and-recommendations.html"><i class="fa fa-check"></i><b>4</b> Conclusion and Recommendations</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#conclusion"><i class="fa fa-check"></i><b>4.1</b> Conclusion</a></li>
-<li class="chapter" data-level="4.2" data-path="recommendations-and-conclusion.html"><a href="recommendations-and-conclusion.html#recommendations"><i class="fa fa-check"></i><b>4.2</b> Recommendations</a></li>
+<li class="chapter" data-level="4.1" data-path="conclusion-and-recommendations.html"><a href="conclusion-and-recommendations.html#findings"><i class="fa fa-check"></i><b>4.1</b> Findings</a></li>
+<li class="chapter" data-level="4.2" data-path="conclusion-and-recommendations.html"><a href="conclusion-and-recommendations.html#next-steps"><i class="fa fa-check"></i><b>4.2</b> Next Steps</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>5</b> Acknowledgments</a></li>
 <li class="divider"></li>
@@ -123,79 +131,78 @@
 <p>However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba establishments. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and capping reviews per business at three.</p>
 <p>To optimize the efficiency of data retrieval from the API, we implemented a Yelp API wrapper obtained from the GitHub repository authored by <span class="citation">@gfairchild</span>. The Yelp API wrapper functioned as an intermediary layer, simplifying the communication process between our system and Yelp’s data services. By leveraging the wrapper, we were able to enhance the clarity of our code and simplify the technical intricacies associated with making requests directly to the API.</p>
 <p>Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis. Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. We chose to move forward by discarding variables where the number of null values exceeds 50% of the total number of values and omitted the price and wifi variables given from Yelp. We moved forward in our analysis with the variables listed below.</p>
+<pre><code>##  [1] &quot;Name&quot;                          &quot;Phone&quot;                        
+##  [3] &quot;Rating&quot;                        &quot;Address&quot;                      
+##  [5] &quot;Street.Address&quot;                &quot;City&quot;                         
+##  [7] &quot;Categories&quot;                    &quot;Review.Count&quot;                 
+##  [9] &quot;Latitude&quot;                      &quot;Longitude&quot;                    
+## [11] &quot;Reviews&quot;                       &quot;source&quot;                       
+## [13] &quot;Authenticity&quot;                  &quot;Restaurant&quot;                   
+## [15] &quot;chain&quot;                         &quot;Bubble.Tea_ind&quot;               
+## [17] &quot;Coffee...Tea_ind&quot;              &quot;Juice.Bars...Smoothies_ind&quot;   
+## [19] &quot;Taiwanese_ind&quot;                 &quot;Tea.Rooms_ind&quot;                
+## [21] &quot;Desserts_ind&quot;                  &quot;Ice.Cream...Frozen.Yogurt_ind&quot;
+## [23] &quot;Shaved.Ice_ind&quot;                &quot;Donuts_ind&quot;                   
+## [25] &quot;Asian.Fusion_ind&quot;              &quot;Vietnamese_ind&quot;               
+## [27] &quot;Cafes_ind&quot;                     &quot;Bakeries_ind&quot;                 
+## [29] &quot;Ramen_ind&quot;                     &quot;Arcades_ind&quot;                  
+## [31] &quot;Chicken.Wings_ind&quot;             &quot;Sandwiches_ind&quot;               
+## [33] &quot;Japanese_ind&quot;                  &quot;Waffles_ind&quot;                  
+## [35] &quot;Sushi.Bars_ind&quot;                &quot;Custom.Cakes_ind&quot;             
+## [37] &quot;Dim.Sum_ind&quot;                   &quot;Hong.Kong.Style.Cafe_ind&quot;     
+## [39] &quot;Creperies_ind&quot;                 &quot;Chinese_ind&quot;                  
+## [41] &quot;International.Grocery_ind&quot;</code></pre>
 <p>Each shop, which is also each Yelp entry, is designated with up to 3 tags. These include phrases like “Bubble Tea” or “Coffee Shop”. We filtered on the tag “Bubble Tea” to finish designating our data sets for both Raleigh and New York City (NYC). The source variable attaches each shop to a location.</p>
-<p>Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the NYC and Raleigh areas.</p>
+<p>Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the Raleigh and NYC areas.</p>
 <p>This concluded the iterative process to achieve a final data set. Below is a snippet of the data table with binary indicator variables for each category.</p>
-<pre><code>##                  Name       Phone Rating                                          Address
-## 1  OMTea Boba &amp; Bites 19198098493    4.5             3901 Capital Blvd, Raleigh, NC 27604
-## 2  Moge Tee - Raleigh 19842009008    4.5    2304 Hillsborough St, #100, Raleigh, NC 27607
-## 3 Cha House - Raleigh 19195941980    4.5 3001 Hillsborough St, Ste 108, Raleigh, NC 27607
-## 4           Boba Baba 19844650302    4.5          12102 Bradford Green Sq, Cary, NC 27513
-## 5   Champloo Desserts 19196278628    4.5    8320 Litchford Rd, Ste 150, Raleigh, NC 27604
-## 6            Feng Cha          NA    4.5    3037 Village Market Pl, Morrisville, NC 27560
-##            Street.Address        City                                       Categories
-## 1       3901 Capital Blvd     Raleigh Bubble Tea, Coffee &amp; Tea, Juice Bars &amp; Smoothies
-## 2    2304 Hillsborough St     Raleigh                                       Bubble Tea
-## 3    3001 Hillsborough St     Raleigh              Bubble Tea, Taiwanese, Coffee &amp; Tea
-## 4 12102 Bradford Green Sq        Cary                  Tea Rooms, Bubble Tea, Desserts
-## 5       8320 Litchford Rd     Raleigh  Desserts, Bubble Tea, Ice Cream &amp; Frozen Yogurt
-## 6  3037 Village Market Pl Morrisville                                       Bubble Tea
-##   Review.Count Latitude Longitude
-## 1           57 35.83500 -78.58510
-## 2           90 35.78758 -78.66618
-## 3           86 35.78926 -78.67615
-## 4          260 35.79369 -78.84599
-## 5           50 35.89288 -78.60017
-## 6           67 35.80700 -78.81801
+<pre><code>##                  Name       Phone Rating
+## 1  OMTea Boba &amp; Bites 19198098493    4.5
+## 2  Moge Tee - Raleigh 19842009008    4.5
+## 3 Cha House - Raleigh 19195941980    4.5
+##                                            Address       Street.Address    City
+## 1             3901 Capital Blvd, Raleigh, NC 27604    3901 Capital Blvd Raleigh
+## 2    2304 Hillsborough St, #100, Raleigh, NC 27607 2304 Hillsborough St Raleigh
+## 3 3001 Hillsborough St, Ste 108, Raleigh, NC 27607 3001 Hillsborough St Raleigh
+##                                         Categories Review.Count Latitude
+## 1 Bubble Tea, Coffee &amp; Tea, Juice Bars &amp; Smoothies           57 35.83500
+## 2                                       Bubble Tea           90 35.78758
+## 3              Bubble Tea, Taiwanese, Coffee &amp; Tea           86 35.78926
+##   Longitude
+## 1 -78.58510
+## 2 -78.66618
+## 3 -78.67615
 ##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Reviews
 ## 1              [&quot;My mom loves boba and has been trying to make me love for it for years. I don&#39;t like the jelly feel of it. This time she ordered me a mango smoothie with...&quot;, &quot;I ordered an iced honeydew milk tea with boba and it was delicious! Cute little shop and I can&#39;t wait to try the popcorn chickens, they looked so good! Ppl...&quot;, &#39;I have been craving Matcha boba tea and decided to order delivery from OMTea for lunch. This place is excellent. They offer so many lactose and dairy free...&#39;]
 ## 2      [&quot;One of the best boba I&#39;ve had in the east! Chewy and fresh. The tea is fragrant too, tho I wish it was stronger in taste.\\n\\nThe menu is soooo extensive, and...&quot;, &quot;This is by far my favorite tea house in Raleigh. I&#39;ve been on a bit of a boba tea kick and have visited so many recently but I keep going back to Moge. \\nI...&quot;, &quot;Out of all the bubble tea chains we&#39;ve tried in the Triangle (e.g., Cha House, Quickly), Moge Tee has been the best and most consistent in terms of quality...&quot;]
 ## 3 [&quot;Such a cute and clean place, it&#39;s well decorated and inviting with a friendly staff, and solid menu. Enough boba options to chose from, and even vegetarian...&quot;, &#39;I enjoy coming here for lunch. I always get the tofu rice plate and a bubble tea. The plate comes with a boiled egg and steamed broccoli. It feels healthy...&#39;, &#39;Cha House was hit or miss.\\n\\nPros:\\n* Easy online ordering. Phone-friendly user interface.\\n* Oolong Classic Milk Tea and Lychee Fruit Tea were good.\\n* Pudding...&#39;]
-## 4                [&#39;My go to boba place in the Triangle! Boba is great, the flavors in their drinks are creative and genuine. They are also my go to spot for mochi donuts - my...&#39;, &#39;If you are expecting pure unadulterated matcha and are used to that then you will be disappointed.\\nThis Matcha latte with almond milk and 25% sweet was...&#39;, &quot;I heard so much about this place for boba and cream puffs, and was eager to pay it a visit. Unfortunately, I don&#39;t think I ordered well and will have to...&quot;]
-## 5                    [&quot;As soon as you walked in they welcomed you; it&#39;s a small cute place; the menu is a big variety and atmosphere is amazing.  Panda themed and great for pics...&quot;, &#39;What a fun spot! After seeing the photos on Yelp, I knew I had to head in with my son. We went on a Saturday early afternoon and they got busy quickly. The...&#39;, &#39;We were walking around the mall after dinner and found this place. My hubby had some room so we split a birthday themed dessert.  I loved the whole...&#39;]
-## 6         [&quot;I&#39;ll start off by saying it&#39;s huge. It looked very small from outside but it has plenty of sitting and beautifully decorated. \\nI had a hard time making my...&quot;, &#39;This is by far my FAVORITE bubble tea store in the Triangle. The fruit teas and class milk teas have this aromatic tea flavor and the flavors taste natural....&#39;, &#39;Came here for my birthday last year (sorry, this is a late review!) but I loved my first time! \\n\\nThe ambiance is modern and warm. If only the space was...&#39;]
 ##         source Authenticity Restaurant chain Bubble.Tea_ind Coffee...Tea_ind
-## 1 raleigh_boba            0          0     0              1                1
-## 2 raleigh_boba            1          0     1              1                0
-## 3 raleigh_boba            1          0     1              1                1
-## 4 raleigh_boba            1          0     0              1                0
-## 5 raleigh_boba            1          0     0              1                0
-## 6 raleigh_boba            1          0     0              1                0
+## 1 raleigh_boba        FALSE      FALSE FALSE           TRUE             TRUE
+## 2 raleigh_boba         TRUE      FALSE  TRUE           TRUE            FALSE
+## 3 raleigh_boba         TRUE      FALSE  TRUE           TRUE             TRUE
 ##   Juice.Bars...Smoothies_ind Taiwanese_ind Tea.Rooms_ind Desserts_ind
-## 1                          1             0             0            0
-## 2                          0             0             0            0
-## 3                          0             1             0            0
-## 4                          0             0             1            1
-## 5                          0             0             0            1
-## 6                          0             0             0            0
-##   Ice.Cream...Frozen.Yogurt_ind Shaved.Ice_ind Donuts_ind Asian.Fusion_ind Vietnamese_ind
-## 1                             0              0          0                0              0
-## 2                             0              0          0                0              0
-## 3                             0              0          0                0              0
-## 4                             0              0          0                0              0
-## 5                             1              0          0                0              0
-## 6                             0              0          0                0              0
-##   Cafes_ind Bakeries_ind Ramen_ind Arcades_ind Chicken.Wings_ind Sandwiches_ind
-## 1         0            0         0           0                 0              0
-## 2         0            0         0           0                 0              0
-## 3         0            0         0           0                 0              0
-## 4         0            0         0           0                 0              0
-## 5         0            0         0           0                 0              0
-## 6         0            0         0           0                 0              0
-##   Japanese_ind Waffles_ind Sushi.Bars_ind Custom.Cakes_ind Dim.Sum_ind
-## 1            0           0              0                0           0
-## 2            0           0              0                0           0
-## 3            0           0              0                0           0
-## 4            0           0              0                0           0
-## 5            0           0              0                0           0
-## 6            0           0              0                0           0
-##   Hong.Kong.Style.Cafe_ind Creperies_ind Chinese_ind International.Grocery_ind
-## 1                        0             0           0                         0
-## 2                        0             0           0                         0
-## 3                        0             0           0                         0
-## 4                        0             0           0                         0
-## 5                        0             0           0                         0
-## 6                        0             0           0                         0</code></pre>
+## 1                       TRUE         FALSE         FALSE        FALSE
+## 2                      FALSE         FALSE         FALSE        FALSE
+## 3                      FALSE          TRUE         FALSE        FALSE
+##   Ice.Cream...Frozen.Yogurt_ind Shaved.Ice_ind Donuts_ind Asian.Fusion_ind
+## 1                         FALSE          FALSE      FALSE            FALSE
+## 2                         FALSE          FALSE      FALSE            FALSE
+## 3                         FALSE          FALSE      FALSE            FALSE
+##   Vietnamese_ind Cafes_ind Bakeries_ind Ramen_ind Arcades_ind Chicken.Wings_ind
+## 1          FALSE     FALSE        FALSE     FALSE       FALSE             FALSE
+## 2          FALSE     FALSE        FALSE     FALSE       FALSE             FALSE
+## 3          FALSE     FALSE        FALSE     FALSE       FALSE             FALSE
+##   Sandwiches_ind Japanese_ind Waffles_ind Sushi.Bars_ind Custom.Cakes_ind
+## 1          FALSE        FALSE       FALSE          FALSE            FALSE
+## 2          FALSE        FALSE       FALSE          FALSE            FALSE
+## 3          FALSE        FALSE       FALSE          FALSE            FALSE
+##   Dim.Sum_ind Hong.Kong.Style.Cafe_ind Creperies_ind Chinese_ind
+## 1       FALSE                    FALSE         FALSE       FALSE
+## 2       FALSE                    FALSE         FALSE       FALSE
+## 3       FALSE                    FALSE         FALSE       FALSE
+##   International.Grocery_ind
+## 1                     FALSE
+## 2                     FALSE
+## 3                     FALSE</code></pre>
 <p>After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder of the Xiaolongbao respository under the week 11 RMD. Raleigh had n= 44 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. The following variables formed the core of our analysis:</p>
 <ul>
 <li><p>Name</p></li>
@@ -209,9 +216,9 @@
 </div>
 <div id="data-exploration" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Data Exploration<a href="data.html#data-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Prior to analysis, we performed some exploratory data analysis in RStudio. One of the most thought-provoking visualizations we crafted was a boxplot comparing the ratings of boba shops in NYC and Raleigh, pictured below in Figure 1.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Contrary to our initial expectations, the boxplot revealed a notable trend: Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba. While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted section 3.</p>
+<p>Prior to analysis, we performed some exploratory data analysis in RStudio. Yelp’s ratings and reviews work by allowing users to rate businesses on a scale of 1 to 5 stars and write a review about their experiences (<a href="https://reviewsonmywebsite.com/blog/yelp-reviews#" class="uri">https://reviewsonmywebsite.com/blog/yelp-reviews#</a>:~:text=reach%20more%20customers.-,How%20do%20Yelp%20ratings%20and%20reviews%20work%3F,on%20a%20business%27s%20Yelp%20page). One of the most thought-provoking visualizations we crafted was a boxplot comparing the ratings of boba shops in Raleigh and NYC, pictured below in Figure 1.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba (<a href="https://www.foodydata.com/post/which-american-city-has-best-chinese-food#" class="uri">https://www.foodydata.com/post/which-american-city-has-best-chinese-food#</a>:~:text=New%20York%20is%2C%20of%20course,Chinese%20food%20is%20most%20popular). While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted section 3.</p>
 
 </div>
 </div>

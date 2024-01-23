@@ -11,9 +11,11 @@ To optimize the efficiency of data retrieval from the API, we implemented a Yelp
 
 Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis. Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. We chose to move forward by discarding variables where the number of null values exceeds 50% of the total number of values and omitted the price and wifi variables given from Yelp. We moved forward in our analysis with the variables listed below.
 
-```{r, include=FALSE}
-boba <- read.csv("~/boba/Data/final_all.csv")
-head(boba)
+```{r, echo=FALSE}
+# boba <- read.csv("~/boba/Data/final_all.csv")
+boba <- read.csv("~/boba/data.csv")
+
+print(names(boba))
 ```
 
 Each shop, which is also each Yelp entry, is designated with up to 3 tags. These include phrases like “Bubble Tea” or “Coffee Shop”. We filtered on the tag “Bubble Tea” to finish designating our data sets for both Raleigh and New York City (NYC). The source variable attaches each shop to a location.
@@ -22,8 +24,7 @@ Before proceeding with the modeling phase, we conducted further data manipulatio
 
 This concluded the iterative process to achieve a final data set. Below is a snippet of the data table with binary indicator variables for each category.
 ```{r, echo=FALSE}
-boba2 <- read.csv("~/boba/Data/slide_final.csv")
-head(boba2)
+print(head(boba, 3))
 ```
 
 After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder of the Xiaolongbao respository under the week 11 RMD. Raleigh had n= 44 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. The following variables formed the core of our analysis:
@@ -48,7 +49,7 @@ Prior to analysis, we performed some exploratory data analysis in RStudio. Yelp'
 ```{r, echo=FALSE}
 library("ggplot2")
 
-boxplot(Rating~as.factor(source),data=boba2, main="Rating Distribution",
+boxplot(Rating~as.factor(source),data=boba, main="Rating Distribution",
    xlab="Location", ylab="Rating (1-5)", names=c("NYC","Raleigh"))
 ```
 

@@ -2,7 +2,7 @@
 ## Statistical Tests 
 Prior to conducting any statistical tests, we checked the assumptions for normality, equal variance, and independence. Since we had a relatively small data set, we used the Shapiro-Wilk test to assess whether the shops are normally distributed and Levene's test for equality of variances (F-test) between shops in Raleigh and NYC. While the normality assumption did not hold (p= 3.81 x 10-4), we were able to confirm the equality of variances (p= 0.81). For the independence assumption, we assumed each shop was independent; however, we created a feature called “chain” that provided a binary flag if a shop had multiple locations. 
 
-Thus, we performed Welch’s 2 sample t-test on the two different groups. We found that boba shops in Raleigh were significantly different from boba shops in NYC, with a p-value of 4e-03. All statistical tests utilized a significance level (alpha) of 0.05. The mean rating of shops in Raleigh was 4.16 (variance 0.32), while the mean rating in NYC was 3.84 (variance 0.35). This resulted in a difference in means of 0.35, as seen in Figure 1 in the previous section.
+Thus, we performed a Wilcoxon 2 sample t-test on the two different groups. We found that boba shops in Raleigh were significantly different from boba shops in NYC, with a p-value of 4e-03. All statistical tests utilized a significance level (alpha) of 0.05. The mean rating of shops in Raleigh was 4.16 (variance 0.32), while the mean rating in NYC was 3.84 (variance 0.35). This resulted in a difference in means of 0.35, as seen in Figure 1 in the previous section.
 
 With our intial hypothesis confirmed by the statistically significant difference, our focus shifted to a more detailed comparison of boba shops in Raleigh and NYC. We decided to approach the problem with both an explanatory and predictive approach, running both a linear regression model for explainability and a predictive random forest model to find predictors of boba shop ratings.
 
@@ -10,38 +10,45 @@ With our intial hypothesis confirmed by the statistically significant difference
 To utilize an explanatory approach, we built two different variable selection models with rating as the target variable using stepwise regression. One model was for Raleigh while the other model was for New York City. After setting a full model and an empty model separately for the Raleigh and NYC datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations. The following code chunks display the stepwise selection code.
 
 ### Raleigh Variable Selection 
-```{r, include=FALSE, eval=FALSE}
+```{r, echo=FALSE, message=FALSE}
+boba2 <- boba[,c(1, 3, 6, 8, 12:41)]
+boba2[, c(3,5)] <- lapply(boba2[, c(3,5)], function(col) factor(col))
+boba2[, c(6:34)] <- lapply(boba2[, c(6:34)], function(col) factor(as.numeric(col)))
+
 #import library
 library("tidyverse")
 #filter to only Raleigh variable selection
 raleigh_df <- boba2[boba2$source=="raleigh_boba",]
-#Make the binary columns 13 to 31 as factors
-raleigh_df[, c(9:27)] <- lapply(raleigh_df[, c(9:27)], function(col) factor(col))
+raleigh_df <- raleigh_df[,-c(5,23:32)]
+# summary(raleigh_df[, c(2:34)])
 
-#Rating should be numeric
-raleigh_df$Rating <- as.numeric(raleigh_df$Rating)
 #Do forward selection for the columns that explain rating
-full.model <- lm(Rating ~  ., data = raleigh_df[,c(2,4:5,9:26)])
-empty.model <- lm(Rating ~ 1, data = raleigh_df[,c(2,4:5,9:26)])
-for.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper = full.model), direction = "forward", k = 2)
-step.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper = full.model), direction = "both", k = 2) 
+full.model <- lm(Rating ~ ., data = raleigh_df[,c(2:23)])
+empty.model <- lm(Rating ~ 1, data = raleigh_df)
+#for.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper = full.model), direction = "forward", k = 2,trace = FALSE)
+#summary(for.model.raleigh)
+# AIC=-67.9
+#Rating ~ Juice.Bars...Smoothies_ind + Asian.Fusion_ind + Coffee...Tea_ind + 
+ #   Bakeries_ind + Tea.Rooms_ind <- not sig
+
+step.model.raleigh <- step(empty.model, scope = list(lower = empty.model, upper = full.model), direction = "both", k = 2, trace = FALSE) 
+summary(step.model.raleigh)
 ```
 
 ### NYC Variable Selection
-```{r, eval=FALSE, include=FALSE}
-#import library
-library("tidyverse")
+```{r, echo=FALSE}
 #filter to only NYC variable selection
 nyc_df <- boba2[boba2$source=="nyc_boba",]
+nyc_df <- nyc_df[,-c(5,9,16:19,22,33:34)]
+# summary(nyc_df[, c(2:34)])
 
-nyc_df[, c(9:30)] <- lapply(nyc_df[, c(9:30)], function(col) factor(col))
-#Rating should be numeric
-nyc_df$Rating <- as.numeric(nyc_df$Rating)
 #Do forward selection for the columns that explain rating
-full.model.nyc <- lm(Rating ~  ., data = nyc_df[,c(3, 11:30)])
-empty.model.nyc <- lm(Rating ~ 1, data = nyc_df[,c(2,9:30)])
-for.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "forward", k = 2)
-step.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "both", k = 2) 
+full.model.nyc <- lm(Rating ~  ., data = nyc_df[,c(2:25)])
+empty.model.nyc <- lm(Rating ~ 1, data = nyc_df)
+#for.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "forward", k = 2)
+step.model.nyc <- step(empty.model.nyc, scope = list(lower = empty.model.nyc, upper = full.model.nyc), direction = "both", k = 2, trace=FALSE) 
+summary(step.model.nyc)
+# Authenticity + City + Creperies_ind + Taiwanese_ind + Juice.Bars...Smoothies_ind
 ```
 
 The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.
@@ -50,11 +57,10 @@ The best linear regression for Raleigh had an AIC of -67.90 and five features of
 While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE). We assessed the variable importance of our predictive model output with a variable called “random”, seen in the plot of variable importance for NYC and Raleigh below.
 
 ### The Raleigh plot of variable importance is displayed below:
-```{r, eval=FALSE, include=FALSE}
+```{r, echo=FALSE}
 #import library
 library(randomForest)
 #Run a random forest model for Raleigh
-raleigh_df<- as.data.frame(raleigh_df)
 raleigh_df$random<- rnorm(43)
 set.seed(12345)
 rf.raleigh <- randomForest(Rating ~ ., data = raleigh_df, ntree = 250, importance = TRUE)
@@ -71,11 +77,7 @@ The top important variables for the predictive model in Raleigh were similar to 
 - Being tagged as a tea room.
 
 ### The NYC plot of variable importance is displayed below:
-```{r, eval=FALSE, include=FALSE}
-#import library
-library(randomForest)
-#Run a random forest model for NYC
-nyc_df <- as.data.frame(nyc_df)
+```{r, echo=FALSE}
 nyc_df$random<- rnorm(70)
 set.seed(12345)
 rf.nyc <- randomForest(Rating ~ ., data = nyc_df, ntree = 250, importance = TRUE)
