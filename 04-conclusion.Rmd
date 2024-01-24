@@ -8,7 +8,7 @@ The boxplot of mean ratings created questions around three main takeaways from o
 
   - The random forest model confirmed that the "city" feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.
 
-In Raleigh, Asian fusion and bakeries were important Yelp attributions to secure high ratings. Conversely, in NYC, authenticity and the offering of custom cake attributions played key roles. These findings suggest that customers in NYC seem to have higher expectations as compared with customers in Raleigh, which was further supported after visual comparisons of each location data set.
+In Raleigh, Asian fusion and coffee/tea were important Yelp attributions to secure high ratings. Conversely, in NYC, authenticity and the Taiwanese attributions played key roles. These findings suggest that customers in NYC seem to have higher expectations as compared with customers in Raleigh, which was further supported after visual comparisons of each location data set.
 
 ## Recommendations
 From our conclusion, we recommend that aspiring businesses considering a new boba shop could:

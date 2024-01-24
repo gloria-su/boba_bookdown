@@ -55,8 +55,9 @@ The Raleigh plot of variable importance is displayed below:
 #import library
 library(randomForest)
 #Run a random forest model for Raleigh
+set.seed(444)
 raleigh_df$random<- rnorm(43)
-set.seed(12345)
+set.seed(444)
 rf.raleigh <- randomForest(Rating ~ ., data = raleigh_df, ntree = 250, importance = TRUE)
 varImpPlot(rf.raleigh ,
            sort = TRUE,
@@ -64,7 +65,7 @@ varImpPlot(rf.raleigh ,
            main = "Top 10 - Variable Importance for Raleigh", type = 1)
 ```
 
-The top important variables for the predictive model in Raleigh were similar to the linear regression model. Of the three explanatory variables of the linear regression (juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator), all three appeared before the random variable. A high overlap between explanatory and predictor variables allows us to infer that there are similar attributes that go into forming and retaining a good Raleigh boba shop. These include:
+The top ten important variables for the predictive model in Raleigh were similar to the linear regression model. Of the three explanatory variables of the linear regression (juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator), only juice bar/smoothie appeared before the random variable. A high overlap between explanatory and predictor variables allows us to infer that there are similar attributes that go into forming and retaining a good Raleigh boba shop. These include:
 
 - Having a variety of options, such as smoothies and juices.
 
@@ -78,8 +79,9 @@ The top important variables for the predictive model in Raleigh were similar to 
 
 The NYC plot of variable importance is displayed below:
 ```{r, echo=FALSE}
+set.seed(444)
 nyc_df$random<- rnorm(70)
-set.seed(12345)
+set.seed(444)
 rf.nyc <- randomForest(Rating ~ ., data = nyc_df, ntree = 250, importance = TRUE)
 varImpPlot(rf.nyc,
            sort = TRUE,
@@ -89,12 +91,10 @@ varImpPlot(rf.nyc,
 
 The top importance variables output from the random forest for New York City seemed to focus on location, seen in the ranking of the “city” feature.
 
-- Having a variety of options, such as smoothies and juices.
-
-It’s important to note that the “city” variable was important in both the Raleigh and NYC variable importance outputs from our random forests; this may indicate that the shop’s location is a large factor in a Yelp rating. This output inspired us to visualize our data set and see the map of boba shops for both data sets.
+It’s important to note that the “city” variable was important in both the Raleigh and NYC variable importance outputs from our random forests; this may indicate that the shop’s location is a large factor in a Yelp rating. This output prompted us to visualize our dataset and explore the map of boba shops across both data sets.
 
 ## Visualization
-We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature "city" in the data set indicated that Raleigh’s n = 44 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating a gap in features between locations.
+We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature "city" in the data set indicated that Raleigh’s n = 43 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating a gap in features between locations.
 
 The random forest model confirmed that the "city" feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.
 
