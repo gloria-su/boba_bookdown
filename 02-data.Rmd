@@ -1,14 +1,14 @@
 # Data
-Utilizing Python and the Pandas library, we initiated the web scraping process to compile our final data set in the CSV format. 
+Utilizing Python and the Pandas library, we initiated the web scraping process to compile our final data set in CSV format. 
 
 ## Data Extraction
-Our data extraction process began with leveraging the Yelp Fusion API, a tool that provides access to Yelp's extensive global business directory. To initiate this process, we submitted a developer application for a private API key through the Yelp Fusion website. Fortunately, the acquisition of the API key was practically instantaneous, and the method to define the appropriate endpoint for our queries was fairly straightforward. More specifically, we used the ‘businesses search’ endpoint to search the Yelp database and retrieve information about businesses, including location, category, or keywords.
+Our data extraction process began with leveraging the Yelp Fusion API, a tool that provides access to Yelp's extensive global business directory. To initiate this process, we submitted a developer application for a private API key through the Yelp Fusion website. Fortunately, the acquisition of the API key and the method to define the appropriate endpoint for our queries were fairly straightforward. More specifically, we used the ‘businesses search’ endpoint to search the Yelp database and retrieve information about businesses, including location, category, and keywords.
 
-However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba establishments. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and capping reviews per business at three.
+However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba shops. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and three reviews per business.
 
 To optimize the efficiency of data retrieval from the API, we implemented a Yelp API wrapper obtained from the GitHub repository authored by @gfairchild. The Yelp API wrapper functioned as an intermediary layer, simplifying the communication process between our system and Yelp's data services. By leveraging the wrapper, we were able to enhance the clarity of our code and simplify the technical intricacies associated with making requests directly to the API.
 
-Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis. Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. We chose to move forward by discarding variables where the number of null values exceeds 50% of the total number of values and omitted the price and wifi variables given from Yelp. We moved forward in our analysis with the variables listed below.
+Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis. Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. We chose to move forward by discarding variables where the number of null values exceeded 50% of the total number of values and omitted the "price" and "wifi" features provided from Yelp. We moved forward in our analysis with the features listed below.
 
 ```{r, echo=FALSE}
 # boba <- read.csv("~/boba/Data/final_all.csv")
@@ -17,11 +17,12 @@ boba <- read.csv("~/boba/data.csv")
 print(names(boba))
 ```
 
-Each shop, which is also each Yelp entry, is designated with up to 3 tags. These include phrases like “Bubble Tea” or “Coffee Shop”. We filtered on the tag “Bubble Tea” to finish designating our data sets for both Raleigh and New York City (NYC). The source variable attaches each shop to a location.
+Each shop, which is also each Yelp entry, is designated with up to three tags. These include phrases like “bubble tea” or “coffee shop”. We filtered on the tag “bubble tea” to finish designating our data sets for both Raleigh and New York City (NYC). The source variable attaches each shop to a location.
 
+## Data Manipulation
 Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the Raleigh and NYC areas.
 
-This concluded the iterative process to achieve a final data set. Below is a snippet of the data table with binary indicator variables for each category.
+This concluded the iterative process to achieve a final data set. Below are the first three observations of the final data set.
 
 ```{r, echo=FALSE}
 print(head(boba, 3))
@@ -44,7 +45,7 @@ After achieving a final data set, we split it into two data sets by location. Th
 Additional variables like chain, authenticity, and restaurant were imputed by using external sources such as Google and our own expertise.
 
 ## Data Exploration
-Prior to analysis, we performed some exploratory data analysis in RStudio. Yelp's ratings and reviews work by allowing users to rate businesses on a scale of 1 to 5 stars and write a review about their experiences (https://reviewsonmywebsite.com/blog/yelp-reviews#:~:text=reach%20more%20customers.-,How%20do%20Yelp%20ratings%20and%20reviews%20work%3F,on%20a%20business%27s%20Yelp%20page). One of the most thought-provoking visualizations we crafted was a boxplot comparing the ratings of boba shops in Raleigh and NYC, pictured below in Figure 1. 
+Prior to analysis, we performed some exploratory data analysis in RStudio. Yelp's ratings and reviews work by allowing users to rate businesses on a scale of one to five and write a review about their experiences (https://reviewsonmywebsite.com/blog/yelp-reviews#). One of the most thought-provoking visualizations we crafted was a boxplot comparing the distribution of ratings of boba shops in Raleigh and NYC, pictured below in Figure 1. 
 
 ```{r, echo=FALSE}
 library("ggplot2")
@@ -53,5 +54,5 @@ boxplot(Rating~as.factor(source),data=boba, main="Rating Distribution",
    xlab="Location", ylab="Rating (1-5)", names=c("NYC","Raleigh"))
 ```
 
-Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba (https://www.foodydata.com/post/which-american-city-has-best-chinese-food#). While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted section 3. 
+Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings since it is known as a “haven for Chinese cuisine,” including boba (https://www.foodydata.com/post/which-american-city-has-best-chinese-food#). While at first glance it seemed like there was a difference in mean ratings between the two locations, we sought a more quantitative approach. Therefore, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted in section 3. 
 

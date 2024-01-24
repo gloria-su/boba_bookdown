@@ -23,7 +23,7 @@
 <meta name="author" content="Violet Evans and Gloria Su" />
 
 
-<meta name="date" content="2024-01-22" />
+<meta name="date" content="2024-01-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -90,17 +90,13 @@
 <li class="chapter" data-level="3.2.1" data-path="methodology-and-results.html"><a href="methodology-and-results.html#raleigh-variable-selection"><i class="fa fa-check"></i><b>3.2.1</b> Raleigh Variable Selection</a></li>
 <li class="chapter" data-level="3.2.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#nyc-variable-selection"><i class="fa fa-check"></i><b>3.2.2</b> NYC Variable Selection</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="methodology-and-results.html"><a href="methodology-and-results.html#predictive-random-forest-model"><i class="fa fa-check"></i><b>3.3</b> Predictive Random Forest Model</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="methodology-and-results.html"><a href="methodology-and-results.html#the-raleigh-plot-of-variable-importance-is-displayed-below"><i class="fa fa-check"></i><b>3.3.1</b> The Raleigh plot of variable importance is displayed below:</a></li>
-<li class="chapter" data-level="3.3.2" data-path="methodology-and-results.html"><a href="methodology-and-results.html#the-nyc-plot-of-variable-importance-is-displayed-below"><i class="fa fa-check"></i><b>3.3.2</b> The NYC plot of variable importance is displayed below:</a></li>
-</ul></li>
+<li class="chapter" data-level="3.3" data-path="methodology-and-results.html"><a href="methodology-and-results.html#random-forest-model"><i class="fa fa-check"></i><b>3.3</b> Random Forest Model</a></li>
 <li class="chapter" data-level="3.4" data-path="methodology-and-results.html"><a href="methodology-and-results.html#visualization"><i class="fa fa-check"></i><b>3.4</b> Visualization</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="conclusion-and-recommendations.html"><a href="conclusion-and-recommendations.html"><i class="fa fa-check"></i><b>4</b> Conclusion and Recommendations</a>
+<li class="chapter" data-level="4" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>4</b> Conclusion</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="conclusion-and-recommendations.html"><a href="conclusion-and-recommendations.html#findings"><i class="fa fa-check"></i><b>4.1</b> Findings</a></li>
-<li class="chapter" data-level="4.2" data-path="conclusion-and-recommendations.html"><a href="conclusion-and-recommendations.html#next-steps"><i class="fa fa-check"></i><b>4.2</b> Next Steps</a></li>
+<li class="chapter" data-level="4.1" data-path="conclusion.html"><a href="conclusion.html#final-thoughts"><i class="fa fa-check"></i><b>4.1</b> Final Thoughts</a></li>
+<li class="chapter" data-level="4.2" data-path="conclusion.html"><a href="conclusion.html#recommendations"><i class="fa fa-check"></i><b>4.2</b> Recommendations</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>5</b> Acknowledgments</a></li>
 <li class="divider"></li>
@@ -125,11 +121,11 @@
 <div id="header">
 <h1 class="title">An Analysis of Boba Yelp Reviews</h1>
 <p class="author"><em>Violet Evans and Gloria Su</em></p>
-<p class="date"><em>2024-01-22</em></p>
+<p class="date"><em>2024-01-24</em></p>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Here, we present a background of our 2023 statistical side project: An Analysis of Boba Yelp Reviews. This project is co-authored by two M.S. in Analytics students at North Carolina State University, Violet Evans and Gloria Su. The inspiration behind our side project came from our love for bubble tea, a stable of Asian American culture.</p>
+<p>Here, we present a background of our 2023 statistical side project: An Analysis of Boba Yelp Reviews. This project is co-authored by two M.S. in Analytics students at North Carolina State University, Violet Evans and Gloria Su. The inspiration behind our side project came from our love for bubble tea, a staple of Asian American culture.</p>
 <p>Bubble tea, also known as boba, is a sweet Taiwanese drink that has grown in popularity across the world since 1988 (<a href="https://www.nationalgeographic.com/travel/article/what-is-boba-bubble-tea-taiwan" class="uri">https://www.nationalgeographic.com/travel/article/what-is-boba-bubble-tea-taiwan</a>). Much of this growing popularity started from a new generation of young Asian Americans, who spread the drink to friends and neighbors from all different cultural backgrounds (<a href="https://www.eater.com/2019/11/5/20942192/bubble-tea-boba-asian-american-diaspora" class="uri">https://www.eater.com/2019/11/5/20942192/bubble-tea-boba-asian-american-diaspora</a>). As Asian Americans raised in North Carolina, we frequently longed for authentic Asian cuisines in the Triangle that would reconnect us with our heritage. Growing up, boba culture wasn’t large. However, the popularity of boba in the broader Raleigh-Durham-Chapel Hill area (the Triangle) has surged, coinciding with the arrival of nearly 40,000 households and businesses between 2018 and 2022. This growth has brought a number of trendy Asian boba shops to the Triangle region. Not only has the number of shops increased, but there also has been a rise in the count of Yelp reviews for each individual shop.</p>
 <p>Due to the extensive variety of boba shop offerings, spanning from milk tea and fruit tea to matcha with various toppings, in our experience, there have never been widely recognized standards for defining a good drink. Our project aim is to address this question by analyzing Yelp reviews.</p>
 <p>The inspiration behind our Yelp API project came from a day in the library after studying for our statistical foundations class. We were chatting about our favorite boba drinks, and the conversation led to our own debate over what truly was the best boba shop in the area. One idea led to another, and we began delving into what a statistical side project could look like on a topic we were invested in— and thus began “An Analysis of Boba Yelp Reviews.”</p>

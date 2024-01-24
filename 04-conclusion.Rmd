@@ -1,14 +1,12 @@
 # Conclusion
 ## Final Thoughts
-The boxplot created questions around two main takeaways from our project: 
+The boxplot of mean ratings created questions around three main takeaways from our project: 
 
- - The mean ratings across Raleigh and NYC.
+ - A significant difference in mean ratings between Raleigh, NC and NYC, NY.
 
- - Variable importance from the linear regression model and random forest model.
+ - Determined important variables explaining why Raleigh boba shops are rated higher than NYC, using a linear regression model with stepwise selection and AIC metrics.
 
-  - The linear regression model utilized stepwise selection to select significant explanatory variables with AIC metrics.
-
-  - The random forest model confirmed that the cities feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.
+  - The random forest model confirmed that the "city" feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.
 
 In Raleigh, Asian fusion and bakeries were important Yelp attributions to secure high ratings. Conversely, in NYC, authenticity and the offering of custom cake attributions played key roles. These findings suggest that customers in NYC seem to have higher expectations as compared with customers in Raleigh, which was further supported after visual comparisons of each location data set.
 

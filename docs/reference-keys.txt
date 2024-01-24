@@ -7,11 +7,9 @@ statistical-tests
 linear-regression-model
 raleigh-variable-selection
 nyc-variable-selection
-predictive-random-forest-model
-the-raleigh-plot-of-variable-importance-is-displayed-below
-the-nyc-plot-of-variable-importance-is-displayed-below
+random-forest-model
 visualization
-conclusion-and-recommendations
-findings
-next-steps
+conclusion
+final-thoughts
+recommendations
 acknowledgments
