@@ -2,7 +2,6 @@
 Utilizing Python and the Pandas library, we initiated the web scraping process to compile our final data set in the CSV format. 
 
 ## Data Extraction
-
 Our data extraction process began with leveraging the Yelp Fusion API, a tool that provides access to Yelp's extensive global business directory. To initiate this process, we submitted a developer application for a private API key through the Yelp Fusion website. Fortunately, the acquisition of the API key was practically instantaneous, and the method to define the appropriate endpoint for our queries was fairly straightforward. More specifically, we used the ‘businesses search’ endpoint to search the Yelp database and retrieve information about businesses, including location, category, or keywords.
 
 However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba establishments. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and capping reviews per business at three.
@@ -23,6 +22,7 @@ Each shop, which is also each Yelp entry, is designated with up to 3 tags. These
 Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the Raleigh and NYC areas.
 
 This concluded the iterative process to achieve a final data set. Below is a snippet of the data table with binary indicator variables for each category.
+
 ```{r, echo=FALSE}
 print(head(boba, 3))
 ```
@@ -53,5 +53,5 @@ boxplot(Rating~as.factor(source),data=boba, main="Rating Distribution",
    xlab="Location", ylab="Rating (1-5)", names=c("NYC","Raleigh"))
 ```
 
-Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba (https://www.foodydata.com/post/which-american-city-has-best-chinese-food#:~:text=New%20York%20is%2C%20of%20course,Chinese%20food%20is%20most%20popular). While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted section 3. 
+Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba (https://www.foodydata.com/post/which-american-city-has-best-chinese-food#). While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted section 3. 
 

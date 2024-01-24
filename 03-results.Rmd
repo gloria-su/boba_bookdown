@@ -2,7 +2,7 @@
 ## Statistical Tests 
 Prior to conducting any statistical tests, we checked the assumptions for normality, equal variance, and independence. Since we had a relatively small data set, we used the Shapiro-Wilk test to assess whether the shops are normally distributed and Levene's test for equality of variances (F-test) between shops in Raleigh and NYC. While the normality assumption did not hold (p= 3.81 x 10-4), we were able to confirm the equality of variances (p= 0.81). For the independence assumption, we assumed each shop was independent; however, we created a feature called “chain” that provided a binary flag if a shop had multiple locations. 
 
-Thus, we performed a Wilcoxon 2 sample t-test on the two different groups. We found that boba shops in Raleigh were significantly different from boba shops in NYC, with a p-value of 4e-03. All statistical tests utilized a significance level (alpha) of 0.05. The mean rating of shops in Raleigh was 4.16 (variance 0.32), while the mean rating in NYC was 3.84 (variance 0.35). This resulted in a difference in means of 0.35, as seen in Figure 1 in the previous section.
+Thus, we performed Welch’s 2 sample t-test on the two different groups. We found that boba shops in Raleigh were significantly different from boba shops in NYC, with a p-value of 4e-03. All statistical tests utilized a significance level (alpha) of 0.05. The mean rating of shops in Raleigh was 4.16 (variance 0.32), while the mean rating in NYC was 3.84 (variance 0.35). This resulted in a difference in means of 0.35, as seen in Figure 1 in the previous section.
 
 With our intial hypothesis confirmed by the statistically significant difference, our focus shifted to a more detailed comparison of boba shops in Raleigh and NYC. We decided to approach the problem with both an explanatory and predictive approach, running both a linear regression model for explainability and a predictive random forest model to find predictors of boba shop ratings.
 
@@ -53,10 +53,10 @@ summary(step.model.nyc)
 
 The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.
 
-## Predictive Random Forest Model
-While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE). We assessed the variable importance of our predictive model output with a variable called “random”, seen in the plot of variable importance for NYC and Raleigh below.
+## Random Forest Model
+While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE). We assessed the variable importance of our predictive model output with a variable called “random”, seen in the plot of variable importance for Raleigh and NYC below.
 
-### The Raleigh plot of variable importance is displayed below:
+The Raleigh plot of variable importance is displayed below:
 ```{r, echo=FALSE}
 #import library
 library(randomForest)
@@ -69,14 +69,20 @@ varImpPlot(rf.raleigh ,
            n.var = 10,
            main = "Top 10 - Variable Importance for Raleigh", type = 1)
 ```
+
 The top important variables for the predictive model in Raleigh were similar to the linear regression model. Of the five explanatory variables of the linear regression (juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator), four appeared before the random variable. A high overlap between explanatory and predictor variables allows us to infer that there are similar variables that go into forming and retaining a good Raleigh boba shop. These include:
+
 - Having a variety of options, such as smoothies and juices.
+
 - Appealing to the “fusion” audience rather than as an authentic boba shop.
+
 - Location.
+
 - Having food options, such as baked goods.
+
 - Being tagged as a tea room.
 
-### The NYC plot of variable importance is displayed below:
+The NYC plot of variable importance is displayed below:
 ```{r, echo=FALSE}
 nyc_df$random<- rnorm(70)
 set.seed(12345)
@@ -86,13 +92,13 @@ varImpPlot(rf.nyc,
            n.var = 10,
            main = "Top 10 - Variable Importance for NYC", type = 1)
 ```
+
 The top importance variables output from the random forest for New York City seemed to focus on location and authenticity, seen in the “longitude”, “city”, and “authenticity” variables. The custom cakes indicator also appeared before our random variable.
 
-It’s important to note that the “city” variable was important in both the NYC and Raleigh variable importance outputs from our random forests; this may indicate that the shop’s location is a large factor in a Yelp rating. This output inspired us to visualize our data set and see the map of boba shops for both data sets.
+It’s important to note that the “city” variable was important in both the Raleigh and NYC variable importance outputs from our random forests; this may indicate that the shop’s location is a large factor in a Yelp rating. This output inspired us to visualize our data set and see the map of boba shops for both data sets.
 
 ## Visualization
-We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature cities in the data set indicated that Raleigh’s n = 44 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating that there was a gap in features between locations.
+We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature cities in the data set indicated that Raleigh’s n = 44 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating a gap in features between locations.
 
 The random forest model confirmed that the cities feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.
-
 
