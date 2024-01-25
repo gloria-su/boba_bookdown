@@ -80,7 +80,8 @@
 <li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#data-extraction"><i class="fa fa-check"></i><b>2.1</b> Data Extraction</a></li>
-<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#data-exploration"><i class="fa fa-check"></i><b>2.2</b> Data Exploration</a></li>
+<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#data-manipulation"><i class="fa fa-check"></i><b>2.2</b> Data Manipulation</a></li>
+<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#data-exploration"><i class="fa fa-check"></i><b>2.3</b> Data Exploration</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="methodology-and-results.html"><a href="methodology-and-results.html"><i class="fa fa-check"></i><b>3</b> Methodology and Results</a>
 <ul>
@@ -99,6 +100,7 @@
 <li class="chapter" data-level="4.2" data-path="conclusion.html"><a href="conclusion.html#recommendations"><i class="fa fa-check"></i><b>4.2</b> Recommendations</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>5</b> Acknowledgments</a></li>
+<li class="chapter" data-level="6" data-path="citations.html"><a href="citations.html"><i class="fa fa-check"></i><b>6</b> Citations</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -122,13 +124,13 @@
 <h1><span class="header-section-number">3</span> Methodology and Results<a href="methodology-and-results.html#methodology-and-results" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="statistical-tests" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Statistical Tests<a href="methodology-and-results.html#statistical-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Prior to conducting any statistical tests, we checked the assumptions for normality, equal variance, and independence. Since we had a relatively small data set, we used the Shapiro-Wilk test to assess whether the shops are normally distributed and Levene’s test for equality of variances (F-test) between shops in Raleigh and NYC. While the normality assumption did not hold (p= 3.81 x 10-4), we were able to confirm the equality of variances (p= 0.81). For the independence assumption, we assumed each shop was independent; however, we created a feature called “chain” that provided a binary flag if a shop had multiple locations.</p>
-<p>Thus, we performed Welch’s 2 sample t-test on the two different groups. We found that boba shops in Raleigh were significantly different from boba shops in NYC, with a p-value of 4e-03. All statistical tests utilized a significance level (alpha) of 0.05. The mean rating of shops in Raleigh was 4.16 (variance 0.32), while the mean rating in NYC was 3.84 (variance 0.35). This resulted in a difference in means of 0.35, as seen in Figure 1 in the previous section.</p>
-<p>With our intial hypothesis confirmed by the statistically significant difference, our focus shifted to a more detailed comparison of boba shops in Raleigh and NYC. We decided to approach the problem with both an explanatory and predictive approach, running both a linear regression model for explainability and a predictive random forest model to find predictors of boba shop ratings.</p>
+<p>Prior to conducting any statistical tests, we checked the assumptions for normality, equal variance, and independence. Since we had a relatively small data set, we used the Shapiro-Wilk test to assess whether the shops were normally distributed and Levene’s test for equality of variances (F-test) between shops in Raleigh and NYC. While the normality assumption did not hold (p= 3.81 x 10-4), we were able to confirm the equality of variances (p= 0.81). For the independence assumption, we assumed each shop was independent; however, we created a feature called “chain” that provided a binary flag if there were multiple locations.</p>
+<p>Thus, we performed a Wilcoxon’s 2 sample t-test on the two different groups. We found that boba shops in Raleigh were significantly different from boba shops in NYC, with a p-value of 4e-03. All statistical tests utilized a significance level (alpha) of 0.05. The mean rating of shops in Raleigh was 4.16 (variance 0.32), while the mean rating in NYC was 3.84 (variance 0.35). This resulted in a difference in means of 0.35.</p>
+<p>With our intial hypothesis confirmed by the statistically significant difference, our focus shifted to a more detailed comparison of boba shops in Raleigh and NYC. We decided to utilize both an explanatory and predictive approach, running a linear regression model for explainability and a random forest model for predictability.</p>
 </div>
 <div id="linear-regression-model" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Linear Regression Model<a href="methodology-and-results.html#linear-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To utilize an explanatory approach, we built two different variable selection models with rating as the target variable using forward stepwise regression. One model was for Raleigh while the other model was for New York City. After setting a full model and an empty model separately for the Raleigh and NYC datasets, we ran stepwise selection with k, the number of model parameters, set to 2 for both locations. The following code chunks display the stepwise selection code.</p>
+<p>To utilize an explanatory approach, we built two different variable selection models with rating as the target variable using forward stepwise regression. One model was for Raleigh while the other model was for New York City. After setting a full model and an empty model separately for the Raleigh and NYC data sets, we ran stepwise selection with k, the number of model parameters, set to 2. The following code chunks display the stepwise selection code.</p>
 <div id="raleigh-variable-selection" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Raleigh Variable Selection<a href="methodology-and-results.html#raleigh-variable-selection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <pre><code>## 
@@ -141,13 +143,13 @@
 ## -1.03755 -0.27358  0.06431  0.22642  0.72642 
 ## 
 ## Coefficients:
-##                             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                  4.27358    0.09213  46.385  &lt; 2e-16 ***
-## Juice.Bars...Smoothies_ind1 -0.73603    0.16208  -4.541 5.76e-05 ***
-## Asian.Fusion_ind1           -0.97265    0.31419  -3.096  0.00373 ** 
-## Coffee...Tea_ind1            0.39814    0.14467   2.752  0.00912 ** 
-## Bakeries_ind1               -0.52265    0.31419  -1.663  0.10467    
-## Tea.Rooms_ind1               0.47642    0.31483   1.513  0.13871    
+##                             Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)                  4.27358    0.09213  46.385 &lt; 0.0000000000000002 ***
+## Juice.Bars...Smoothies_ind1 -0.73603    0.16208  -4.541            0.0000576 ***
+## Asian.Fusion_ind1           -0.97265    0.31419  -3.096              0.00373 ** 
+## Coffee...Tea_ind1            0.39814    0.14467   2.752              0.00912 ** 
+## Bakeries_ind1               -0.52265    0.31419  -1.663              0.10467    
+## Tea.Rooms_ind1               0.47642    0.31483   1.513              0.13871    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -167,50 +169,50 @@
 ## -1.02837 -0.24584  0.00181  0.27797  1.47163 
 ## 
 ## Coefficients:
-##                             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                   5.1026     0.4282  11.917  &lt; 2e-16 ***
-## Authenticity1                -0.4408     0.1286  -3.427  0.00114 ** 
-## CityElmhurst                 -1.0037     0.4709  -2.131  0.03738 *  
-## CityFlushing                 -1.1334     0.4276  -2.651  0.01038 *  
-## CityForest Hills             -0.9790     0.5428  -1.804  0.07659 .  
-## CityFresh Meadows            -0.4075     0.4518  -0.902  0.37089    
-## CityJackson Heights          -0.1618     0.6574  -0.246  0.80647    
-## CityNew York                  0.1178     0.5510   0.214  0.83149    
-## CityQueens                   -0.7002     0.4608  -1.520  0.13411    
-## CityRego Park                -1.1618     0.6574  -1.767  0.08255 .  
-## Creperies_ind1               -1.3989     0.4500  -3.109  0.00293 ** 
-## Taiwanese_ind1                0.4680     0.2265   2.066  0.04338 *  
-## Juice.Bars...Smoothies_ind1  -0.3063     0.1493  -2.052  0.04480 *  
+##                             Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)                   5.1026     0.4282  11.917 &lt; 0.0000000000000002 ***
+## Authenticity1                -0.4408     0.1286  -3.427              0.00114 ** 
+## CityElmhurst                 -1.0037     0.4709  -2.131              0.03738 *  
+## CityFlushing                 -1.1334     0.4276  -2.651              0.01038 *  
+## CityForest Hills             -0.9790     0.5428  -1.804              0.07659 .  
+## CityFresh Meadows            -0.4075     0.4518  -0.902              0.37089    
+## CityJackson Heights          -0.1618     0.6574  -0.246              0.80647    
+## CityNew York                  0.1178     0.5510   0.214              0.83149    
+## CityQueens                   -0.7002     0.4608  -1.520              0.13411    
+## CityRego Park                -1.1618     0.6574  -1.767              0.08255 .  
+## Creperies_ind1               -1.3989     0.4500  -3.109              0.00293 ** 
+## Taiwanese_ind1                0.4680     0.2265   2.066              0.04338 *  
+## Juice.Bars...Smoothies_ind1  -0.3063     0.1493  -2.052              0.04480 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.4939 on 57 degrees of freedom
 ## Multiple R-squared:  0.4173, Adjusted R-squared:  0.2946 
 ## F-statistic: 3.401 on 12 and 57 DF,  p-value: 0.000866</code></pre>
-<p>The best linear regression for Raleigh had an AIC of -67.90 and five features of the juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator. The best linear regression for NYC had an AIC of 19.72 and found the features of custom cakes indicator, authenticity, and chain. Among the two sites, there were eight distinct features observed in the complete variable selection models of all the variables in explaining the rating. None of these explanatory variables after selection were mutually shared.</p>
+<p>The linear regression for Raleigh that had the lowest AIC of -67.90 included three features of the juice bar/smoothie indicator, Asian fusion indicator, and coffee/tea indicator. The best linear regression for NYC had an AIC of -87.14 and found the features of authenticity, city, creperies, Taiwanese, and juice bar/smoothie indicator. Among the two sites, there were seven distinct features observed between the two variable selection models. The only shared feature was the juice bar/smoothie indicator, leading us to wonder if the random forest features would be similar.</p>
 </div>
 </div>
 <div id="random-forest-model" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Random Forest Model<a href="methodology-and-results.html#random-forest-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. This ranking of variables was determined by the percent increase in the mean squared error (MSE). We assessed the variable importance of our predictive model output with a variable called “random”, seen in the plot of variable importance for Raleigh and NYC below.</p>
+<p>While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. Our feature ranking was determined by the percent increase in the mean squared error (MSE). We assessed the variable importance of our predictive model output with a variable called “random”, seen in the plots below.</p>
 <p>The Raleigh plot of variable importance is displayed below:
-<img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<p>The top important variables for the predictive model in Raleigh were similar to the linear regression model. Of the five explanatory variables of the linear regression (juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator, bakeries indicator, and tea room indicator), four appeared before the random variable. A high overlap between explanatory and predictor variables allows us to infer that there are similar variables that go into forming and retaining a good Raleigh boba shop. These include:</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The top ten important variables for the predictive model in Raleigh were similar to the linear regression model. Of the three explanatory variables of the linear regression (juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator), only juice bar/smoothie appeared before the random variable. A high overlap between explanatory and predictor variables allows us to infer that there are similar attributes that go into forming and retaining a good Raleigh boba shop. These include:</p>
 <ul>
 <li><p>Having a variety of options, such as smoothies and juices.</p></li>
 <li><p>Appealing to the “fusion” audience rather than as an authentic boba shop.</p></li>
-<li><p>Location.</p></li>
-<li><p>Having food options, such as baked goods.</p></li>
 <li><p>Being tagged as a tea room.</p></li>
+<li><p>Having food options, such as baked goods.</p></li>
+<li><p>Offering coffee choices.</p></li>
 </ul>
 <p>The NYC plot of variable importance is displayed below:
-<img src="bookdownproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<p>The top importance variables output from the random forest for New York City seemed to focus on location and authenticity, seen in the “longitude”, “city”, and “authenticity” variables. The custom cakes indicator also appeared before our random variable.</p>
-<p>It’s important to note that the “city” variable was important in both the Raleigh and NYC variable importance outputs from our random forests; this may indicate that the shop’s location is a large factor in a Yelp rating. This output inspired us to visualize our data set and see the map of boba shops for both data sets.</p>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>The top importance variables output from the random forest for New York City seemed to focus on location, seen in the ranking of the “city” feature.</p>
+<p>It’s important to note that the “city” variable was important in both the Raleigh and NYC variable importance outputs from our random forests; this may indicate that the shop’s location is a large factor in a Yelp rating. This output prompted us to visualize our dataset and explore the map of boba shops across both data sets.</p>
 </div>
 <div id="visualization" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Visualization<a href="methodology-and-results.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature “city” in the data set indicated that Raleigh’s n = 44 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating a gap in features between locations.</p>
+<p>We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature “city” in the data set indicated that Raleigh’s n = 4 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating a gap in features between locations.</p>
 <p>The random forest model confirmed that the “city” feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.</p>
 
 </div>

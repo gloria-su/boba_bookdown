@@ -45,7 +45,7 @@ After achieving a final data set, we split it into two data sets by location. Th
 Additional variables like chain, authenticity, and restaurant were imputed by using external sources such as Google and our own expertise.
 
 ## Data Exploration
-Prior to analysis, we performed some exploratory data analysis in RStudio. Yelp's ratings and reviews work by allowing users to rate businesses on a scale of one to five and write a review about their experiences (https://reviewsonmywebsite.com/blog/yelp-reviews#). One of the most thought-provoking visualizations we crafted was a boxplot comparing the distribution of ratings of boba shops in Raleigh and NYC, pictured below in Figure 1. 
+Prior to analysis, we performed some exploratory data analysis in RStudio. Yelp's ratings and reviews work by allowing users to rate businesses on a scale of one to five and write a review about their experiences (Yelp Reviews in 2023: Complete Guide, 2023). One of the most thought-provoking visualizations we crafted was a boxplot comparing the distribution of ratings of boba shops in Raleigh and NYC, pictured below in Figure 1. 
 
 ```{r, echo=FALSE}
 library("ggplot2")
@@ -54,5 +54,5 @@ boxplot(Rating~as.factor(source),data=boba, main="Rating Distribution",
    xlab="Location", ylab="Rating (1-5)", names=c("NYC","Raleigh"))
 ```
 
-Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings since it is known as a “haven for Chinese cuisine,” including boba (https://www.foodydata.com/post/which-american-city-has-best-chinese-food#). While at first glance it seemed like there was a difference in mean ratings between the two locations, we sought a more quantitative approach. Therefore, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted in section 3. 
+Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings since it is known as a “haven for Chinese cuisine,” including boba (Tran, 2021). While at first glance it seemed like there was a difference in mean ratings between the two locations, we sought a more quantitative approach. Therefore, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted in section 3. 
 

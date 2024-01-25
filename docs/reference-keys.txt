@@ -1,6 +1,7 @@
 introduction
 data
 data-extraction
+data-manipulation
 data-exploration
 methodology-and-results
 statistical-tests
@@ -13,3 +14,4 @@ conclusion
 final-thoughts
 recommendations
 acknowledgments
+citations

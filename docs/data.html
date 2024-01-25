@@ -80,7 +80,8 @@
 <li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#data-extraction"><i class="fa fa-check"></i><b>2.1</b> Data Extraction</a></li>
-<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#data-exploration"><i class="fa fa-check"></i><b>2.2</b> Data Exploration</a></li>
+<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#data-manipulation"><i class="fa fa-check"></i><b>2.2</b> Data Manipulation</a></li>
+<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#data-exploration"><i class="fa fa-check"></i><b>2.3</b> Data Exploration</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="methodology-and-results.html"><a href="methodology-and-results.html"><i class="fa fa-check"></i><b>3</b> Methodology and Results</a>
 <ul>
@@ -99,6 +100,7 @@
 <li class="chapter" data-level="4.2" data-path="conclusion.html"><a href="conclusion.html#recommendations"><i class="fa fa-check"></i><b>4.2</b> Recommendations</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i><b>5</b> Acknowledgments</a></li>
+<li class="chapter" data-level="6" data-path="citations.html"><a href="citations.html"><i class="fa fa-check"></i><b>6</b> Citations</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -120,13 +122,13 @@
             <section class="normal" id="section-">
 <div id="data" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">2</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Utilizing Python and the Pandas library, we initiated the web scraping process to compile our final data set in the CSV format.</p>
+<p>Utilizing Python and the Pandas library, we initiated the web scraping process to compile our final data set in CSV format.</p>
 <div id="data-extraction" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Data Extraction<a href="data.html#data-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Our data extraction process began with leveraging the Yelp Fusion API, a tool that provides access to Yelp’s extensive global business directory. To initiate this process, we submitted a developer application for a private API key through the Yelp Fusion website. Fortunately, the acquisition of the API key was practically instantaneous, and the method to define the appropriate endpoint for our queries was fairly straightforward. More specifically, we used the ‘businesses search’ endpoint to search the Yelp database and retrieve information about businesses, including location, category, or keywords.</p>
-<p>However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba establishments. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and capping reviews per business at three.</p>
+<p>Our data extraction process began with leveraging the Yelp Fusion API, a tool that provides access to Yelp’s extensive global business directory. To initiate this process, we submitted a developer application for a private API key through the Yelp Fusion website. Fortunately, the acquisition of the API key and the method to define the appropriate endpoint for our queries were fairly straightforward. More specifically, we used the ‘businesses search’ endpoint to search the Yelp database and retrieve information about businesses, including location, category, and keywords.</p>
+<p>However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba shops. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and three reviews per business.</p>
 <p>To optimize the efficiency of data retrieval from the API, we implemented a Yelp API wrapper obtained from the GitHub repository authored by <span class="citation">@gfairchild</span>. The Yelp API wrapper functioned as an intermediary layer, simplifying the communication process between our system and Yelp’s data services. By leveraging the wrapper, we were able to enhance the clarity of our code and simplify the technical intricacies associated with making requests directly to the API.</p>
-<p>Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis. Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. We chose to move forward by discarding variables where the number of null values exceeds 50% of the total number of values and omitted the price and wifi variables given from Yelp. We moved forward in our analysis with the variables listed below.</p>
+<p>Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis. Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. We chose to move forward by discarding variables where the number of null values exceeded 50% of the total number of values and omitted the “price” and “wifi” features provided from Yelp. We moved forward in our analysis with the features listed below.</p>
 <pre><code>##  [1] &quot;Name&quot;                          &quot;Phone&quot;                        
 ##  [3] &quot;Rating&quot;                        &quot;Address&quot;                      
 ##  [5] &quot;Street.Address&quot;                &quot;City&quot;                         
@@ -148,9 +150,12 @@
 ## [37] &quot;Dim.Sum_ind&quot;                   &quot;Hong.Kong.Style.Cafe_ind&quot;     
 ## [39] &quot;Creperies_ind&quot;                 &quot;Chinese_ind&quot;                  
 ## [41] &quot;International.Grocery_ind&quot;</code></pre>
-<p>Each shop, which is also each Yelp entry, is designated with up to 3 tags. These include phrases like “Bubble Tea” or “Coffee Shop”. We filtered on the tag “Bubble Tea” to finish designating our data sets for both Raleigh and New York City (NYC). The source variable attaches each shop to a location.</p>
+<p>Each shop, which is also each Yelp entry, is designated with up to three tags. These include phrases like “bubble tea” or “coffee shop”. We filtered on the tag “bubble tea” to finish designating our data sets for both Raleigh and New York City (NYC). The source variable attaches each shop to a location.</p>
+</div>
+<div id="data-manipulation" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Data Manipulation<a href="data.html#data-manipulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Before proceeding with the modeling phase, we conducted further data manipulation. Specifically, we employed string splitting on the tags to create binary indicator variables for each of the shop’s categories. A shop could have three categories at maximum. For instance, a binary indicator variable for bubble tea was set to 1 if the observation fell under the bubble tea category and set to 0 otherwise. This approach allowed us to capture nuanced insights for a more comprehensive analysis of boba shops in the Raleigh and NYC areas.</p>
-<p>This concluded the iterative process to achieve a final data set. Below is a snippet of the data table with binary indicator variables for each category.</p>
+<p>This concluded the iterative process to achieve a final data set. Below are the first three observations of the final data set.</p>
 <pre><code>##                  Name       Phone Rating                                          Address
 ## 1  OMTea Boba &amp; Bites 19198098493    4.5             3901 Capital Blvd, Raleigh, NC 27604
 ## 2  Moge Tee - Raleigh 19842009008    4.5    2304 Hillsborough St, #100, Raleigh, NC 27607
@@ -191,7 +196,7 @@
 ## 1       FALSE                     FALSE
 ## 2       FALSE                     FALSE
 ## 3       FALSE                     FALSE</code></pre>
-<p>After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder of the Xiaolongbao respository under the week 11 RMD. Raleigh had n= 44 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. The following variables formed the core of our analysis:</p>
+<p>After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder of the Xiaolongbao respository under the week 11 RMD. Raleigh had n= 43 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. The following variables formed the core of our analysis:</p>
 <ul>
 <li><p>Name</p></li>
 <li><p>Rating</p></li>
@@ -202,11 +207,11 @@
 </ul>
 <p>Additional variables like chain, authenticity, and restaurant were imputed by using external sources such as Google and our own expertise.</p>
 </div>
-<div id="data-exploration" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Data Exploration<a href="data.html#data-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Prior to analysis, we performed some exploratory data analysis in RStudio. Yelp’s ratings and reviews work by allowing users to rate businesses on a scale of 1 to 5 stars and write a review about their experiences (<a href="https://reviewsonmywebsite.com/blog/yelp-reviews#" class="uri">https://reviewsonmywebsite.com/blog/yelp-reviews#</a>:~:text=reach%20more%20customers.-,How%20do%20Yelp%20ratings%20and%20reviews%20work%3F,on%20a%20business%27s%20Yelp%20page). One of the most thought-provoking visualizations we crafted was a boxplot comparing the ratings of boba shops in Raleigh and NYC, pictured below in Figure 1.</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings than Raleigh since this location is known as a “haven for Chinese cuisine,” including boba (<a href="https://www.foodydata.com/post/which-american-city-has-best-chinese-food#" class="uri">https://www.foodydata.com/post/which-american-city-has-best-chinese-food#</a>). While the initial observation suggested a divergence in ratings between the two regions, we sought a more rigorous approach to quantify this difference. Consequently, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted section 3.</p>
+<div id="data-exploration" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Data Exploration<a href="data.html#data-exploration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Prior to analysis, we performed some exploratory data analysis in RStudio. Yelp’s ratings and reviews work by allowing users to rate businesses on a scale of one to five and write a review about their experiences (Yelp Reviews in 2023: Complete Guide, 2023). One of the most thought-provoking visualizations we crafted was a boxplot comparing the distribution of ratings of boba shops in Raleigh and NYC, pictured below in Figure 1.</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Contrary to our initial expectations, the boxplot revealed that Raleigh-based boba shops exhibited higher ratings compared to their counterparts in NYC by 0.35 stars on average. We expected NYC to have higher ratings since it is known as a “haven for Chinese cuisine,” including boba (Tran, 2021). While at first glance it seemed like there was a difference in mean ratings between the two locations, we sought a more quantitative approach. Therefore, we conducted a statistical test to assess the significance of the observed variations in ratings between Raleigh and NYC, highlighted in section 3.</p>
 
 </div>
 </div>
