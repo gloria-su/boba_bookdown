@@ -129,27 +129,20 @@
 <p>However, our interaction with the Yelp Fusion API was not without limitations. Notably, businesses lacking any Yelp reviews would not be returned by the API, leading to the exclusion of new boba shops. Furthermore, the API imposed restrictions, limiting us to 500 API calls per day and three reviews per business.</p>
 <p>To optimize the efficiency of data retrieval from the API, we implemented a Yelp API wrapper obtained from the GitHub repository authored by <span class="citation">@gfairchild</span>. The Yelp API wrapper functioned as an intermediary layer, simplifying the communication process between our system and Yelp’s data services. By leveraging the wrapper, we were able to enhance the clarity of our code and simplify the technical intricacies associated with making requests directly to the API.</p>
 <p>Having secured access to the Yelp Fusion API, we moved on to defining the variables for our analysis. Despite Yelp offering a diverse array of information, we encountered instances where certain data fields, such as price or wifi, contained many null values. We chose to move forward by discarding variables where the number of null values exceeded 50% of the total number of values and omitted the “price” and “wifi” features provided from Yelp. We moved forward in our analysis with the features listed below.</p>
-<pre><code>##  [1] &quot;Name&quot;                          &quot;Phone&quot;                        
-##  [3] &quot;Rating&quot;                        &quot;Address&quot;                      
-##  [5] &quot;Street.Address&quot;                &quot;City&quot;                         
-##  [7] &quot;Categories&quot;                    &quot;Review.Count&quot;                 
-##  [9] &quot;Latitude&quot;                      &quot;Longitude&quot;                    
-## [11] &quot;Reviews&quot;                       &quot;source&quot;                       
-## [13] &quot;Authenticity&quot;                  &quot;Restaurant&quot;                   
-## [15] &quot;chain&quot;                         &quot;Bubble.Tea_ind&quot;               
-## [17] &quot;Coffee...Tea_ind&quot;              &quot;Juice.Bars...Smoothies_ind&quot;   
-## [19] &quot;Taiwanese_ind&quot;                 &quot;Tea.Rooms_ind&quot;                
-## [21] &quot;Desserts_ind&quot;                  &quot;Ice.Cream...Frozen.Yogurt_ind&quot;
-## [23] &quot;Shaved.Ice_ind&quot;                &quot;Donuts_ind&quot;                   
-## [25] &quot;Asian.Fusion_ind&quot;              &quot;Vietnamese_ind&quot;               
-## [27] &quot;Cafes_ind&quot;                     &quot;Bakeries_ind&quot;                 
-## [29] &quot;Ramen_ind&quot;                     &quot;Arcades_ind&quot;                  
-## [31] &quot;Chicken.Wings_ind&quot;             &quot;Sandwiches_ind&quot;               
-## [33] &quot;Japanese_ind&quot;                  &quot;Waffles_ind&quot;                  
-## [35] &quot;Sushi.Bars_ind&quot;                &quot;Custom.Cakes_ind&quot;             
-## [37] &quot;Dim.Sum_ind&quot;                   &quot;Hong.Kong.Style.Cafe_ind&quot;     
-## [39] &quot;Creperies_ind&quot;                 &quot;Chinese_ind&quot;                  
-## [41] &quot;International.Grocery_ind&quot;</code></pre>
+<pre><code>##  [1] &quot;Name&quot;                          &quot;Phone&quot;                         &quot;Rating&quot;                       
+##  [4] &quot;Address&quot;                       &quot;Street.Address&quot;                &quot;City&quot;                         
+##  [7] &quot;Categories&quot;                    &quot;Review.Count&quot;                  &quot;Latitude&quot;                     
+## [10] &quot;Longitude&quot;                     &quot;Reviews&quot;                       &quot;source&quot;                       
+## [13] &quot;Authenticity&quot;                  &quot;Restaurant&quot;                    &quot;chain&quot;                        
+## [16] &quot;Bubble.Tea_ind&quot;                &quot;Coffee...Tea_ind&quot;              &quot;Juice.Bars...Smoothies_ind&quot;   
+## [19] &quot;Taiwanese_ind&quot;                 &quot;Tea.Rooms_ind&quot;                 &quot;Desserts_ind&quot;                 
+## [22] &quot;Ice.Cream...Frozen.Yogurt_ind&quot; &quot;Shaved.Ice_ind&quot;                &quot;Donuts_ind&quot;                   
+## [25] &quot;Asian.Fusion_ind&quot;              &quot;Vietnamese_ind&quot;                &quot;Cafes_ind&quot;                    
+## [28] &quot;Bakeries_ind&quot;                  &quot;Ramen_ind&quot;                     &quot;Arcades_ind&quot;                  
+## [31] &quot;Chicken.Wings_ind&quot;             &quot;Sandwiches_ind&quot;                &quot;Japanese_ind&quot;                 
+## [34] &quot;Waffles_ind&quot;                   &quot;Sushi.Bars_ind&quot;                &quot;Custom.Cakes_ind&quot;             
+## [37] &quot;Dim.Sum_ind&quot;                   &quot;Hong.Kong.Style.Cafe_ind&quot;      &quot;Creperies_ind&quot;                
+## [40] &quot;Chinese_ind&quot;                   &quot;International.Grocery_ind&quot;</code></pre>
 <p>Each shop, which is also each Yelp entry, is designated with up to three tags. These include phrases like “bubble tea” or “coffee shop”. We filtered on the tag “bubble tea” to finish designating our data sets for both Raleigh and New York City (NYC). The source variable attaches each shop to a location.</p>
 </div>
 <div id="data-manipulation" class="section level2 hasAnchor" number="2.2">
@@ -160,14 +153,14 @@
 ## 1  OMTea Boba &amp; Bites 19198098493    4.5             3901 Capital Blvd, Raleigh, NC 27604
 ## 2  Moge Tee - Raleigh 19842009008    4.5    2304 Hillsborough St, #100, Raleigh, NC 27607
 ## 3 Cha House - Raleigh 19195941980    4.5 3001 Hillsborough St, Ste 108, Raleigh, NC 27607
-##         Street.Address    City                                       Categories Review.Count
-## 1    3901 Capital Blvd Raleigh Bubble Tea, Coffee &amp; Tea, Juice Bars &amp; Smoothies           57
-## 2 2304 Hillsborough St Raleigh                                       Bubble Tea           90
-## 3 3001 Hillsborough St Raleigh              Bubble Tea, Taiwanese, Coffee &amp; Tea           86
-##   Latitude Longitude
-## 1 35.83500 -78.58510
-## 2 35.78758 -78.66618
-## 3 35.78926 -78.67615
+##         Street.Address    City                                       Categories Review.Count Latitude
+## 1    3901 Capital Blvd Raleigh Bubble Tea, Coffee &amp; Tea, Juice Bars &amp; Smoothies           57 35.83500
+## 2 2304 Hillsborough St Raleigh                                       Bubble Tea           90 35.78758
+## 3 3001 Hillsborough St Raleigh              Bubble Tea, Taiwanese, Coffee &amp; Tea           86 35.78926
+##   Longitude
+## 1 -78.58510
+## 2 -78.66618
+## 3 -78.67615
 ##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Reviews
 ## 1              [&quot;My mom loves boba and has been trying to make me love for it for years. I don&#39;t like the jelly feel of it. This time she ordered me a mango smoothie with...&quot;, &quot;I ordered an iced honeydew milk tea with boba and it was delicious! Cute little shop and I can&#39;t wait to try the popcorn chickens, they looked so good! Ppl...&quot;, &#39;I have been craving Matcha boba tea and decided to order delivery from OMTea for lunch. This place is excellent. They offer so many lactose and dairy free...&#39;]
 ## 2      [&quot;One of the best boba I&#39;ve had in the east! Chewy and fresh. The tea is fragrant too, tho I wish it was stronger in taste.\\n\\nThe menu is soooo extensive, and...&quot;, &quot;This is by far my favorite tea house in Raleigh. I&#39;ve been on a bit of a boba tea kick and have visited so many recently but I keep going back to Moge. \\nI...&quot;, &quot;Out of all the bubble tea chains we&#39;ve tried in the Triangle (e.g., Cha House, Quickly), Moge Tee has been the best and most consistent in terms of quality...&quot;]
@@ -176,26 +169,26 @@
 ## 1 raleigh_boba        FALSE      FALSE FALSE           TRUE             TRUE
 ## 2 raleigh_boba         TRUE      FALSE  TRUE           TRUE            FALSE
 ## 3 raleigh_boba         TRUE      FALSE  TRUE           TRUE             TRUE
-##   Juice.Bars...Smoothies_ind Taiwanese_ind Tea.Rooms_ind Desserts_ind
-## 1                       TRUE         FALSE         FALSE        FALSE
-## 2                      FALSE         FALSE         FALSE        FALSE
-## 3                      FALSE          TRUE         FALSE        FALSE
-##   Ice.Cream...Frozen.Yogurt_ind Shaved.Ice_ind Donuts_ind Asian.Fusion_ind Vietnamese_ind
-## 1                         FALSE          FALSE      FALSE            FALSE          FALSE
-## 2                         FALSE          FALSE      FALSE            FALSE          FALSE
-## 3                         FALSE          FALSE      FALSE            FALSE          FALSE
-##   Cafes_ind Bakeries_ind Ramen_ind Arcades_ind Chicken.Wings_ind Sandwiches_ind Japanese_ind
-## 1     FALSE        FALSE     FALSE       FALSE             FALSE          FALSE        FALSE
-## 2     FALSE        FALSE     FALSE       FALSE             FALSE          FALSE        FALSE
-## 3     FALSE        FALSE     FALSE       FALSE             FALSE          FALSE        FALSE
-##   Waffles_ind Sushi.Bars_ind Custom.Cakes_ind Dim.Sum_ind Hong.Kong.Style.Cafe_ind Creperies_ind
-## 1       FALSE          FALSE            FALSE       FALSE                    FALSE         FALSE
-## 2       FALSE          FALSE            FALSE       FALSE                    FALSE         FALSE
-## 3       FALSE          FALSE            FALSE       FALSE                    FALSE         FALSE
-##   Chinese_ind International.Grocery_ind
-## 1       FALSE                     FALSE
-## 2       FALSE                     FALSE
-## 3       FALSE                     FALSE</code></pre>
+##   Juice.Bars...Smoothies_ind Taiwanese_ind Tea.Rooms_ind Desserts_ind Ice.Cream...Frozen.Yogurt_ind
+## 1                       TRUE         FALSE         FALSE        FALSE                         FALSE
+## 2                      FALSE         FALSE         FALSE        FALSE                         FALSE
+## 3                      FALSE          TRUE         FALSE        FALSE                         FALSE
+##   Shaved.Ice_ind Donuts_ind Asian.Fusion_ind Vietnamese_ind Cafes_ind Bakeries_ind Ramen_ind
+## 1          FALSE      FALSE            FALSE          FALSE     FALSE        FALSE     FALSE
+## 2          FALSE      FALSE            FALSE          FALSE     FALSE        FALSE     FALSE
+## 3          FALSE      FALSE            FALSE          FALSE     FALSE        FALSE     FALSE
+##   Arcades_ind Chicken.Wings_ind Sandwiches_ind Japanese_ind Waffles_ind Sushi.Bars_ind
+## 1       FALSE             FALSE          FALSE        FALSE       FALSE          FALSE
+## 2       FALSE             FALSE          FALSE        FALSE       FALSE          FALSE
+## 3       FALSE             FALSE          FALSE        FALSE       FALSE          FALSE
+##   Custom.Cakes_ind Dim.Sum_ind Hong.Kong.Style.Cafe_ind Creperies_ind Chinese_ind
+## 1            FALSE       FALSE                    FALSE         FALSE       FALSE
+## 2            FALSE       FALSE                    FALSE         FALSE       FALSE
+## 3            FALSE       FALSE                    FALSE         FALSE       FALSE
+##   International.Grocery_ind
+## 1                     FALSE
+## 2                     FALSE
+## 3                     FALSE</code></pre>
 <p>After achieving a final data set, we split it into two data sets by location. This work can be found in the R folder of the Xiaolongbao respository under the week 11 RMD. Raleigh had n= 43 observations while NYC had n= 70 observations, each with different column counts due to the category tag columns. Raleigh had 28 columns, while NYC had 31 columns. The following variables formed the core of our analysis:</p>
 <ul>
 <li><p>Name</p></li>

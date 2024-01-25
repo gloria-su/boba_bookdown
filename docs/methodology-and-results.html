@@ -143,13 +143,13 @@
 ## -1.03755 -0.27358  0.06431  0.22642  0.72642 
 ## 
 ## Coefficients:
-##                             Estimate Std. Error t value             Pr(&gt;|t|)    
-## (Intercept)                  4.27358    0.09213  46.385 &lt; 0.0000000000000002 ***
-## Juice.Bars...Smoothies_ind1 -0.73603    0.16208  -4.541            0.0000576 ***
-## Asian.Fusion_ind1           -0.97265    0.31419  -3.096              0.00373 ** 
-## Coffee...Tea_ind1            0.39814    0.14467   2.752              0.00912 ** 
-## Bakeries_ind1               -0.52265    0.31419  -1.663              0.10467    
-## Tea.Rooms_ind1               0.47642    0.31483   1.513              0.13871    
+##                             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                  4.27358    0.09213  46.385  &lt; 2e-16 ***
+## Juice.Bars...Smoothies_ind1 -0.73603    0.16208  -4.541 5.76e-05 ***
+## Asian.Fusion_ind1           -0.97265    0.31419  -3.096  0.00373 ** 
+## Coffee...Tea_ind1            0.39814    0.14467   2.752  0.00912 ** 
+## Bakeries_ind1               -0.52265    0.31419  -1.663  0.10467    
+## Tea.Rooms_ind1               0.47642    0.31483   1.513  0.13871    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -169,20 +169,20 @@
 ## -1.02837 -0.24584  0.00181  0.27797  1.47163 
 ## 
 ## Coefficients:
-##                             Estimate Std. Error t value             Pr(&gt;|t|)    
-## (Intercept)                   5.1026     0.4282  11.917 &lt; 0.0000000000000002 ***
-## Authenticity1                -0.4408     0.1286  -3.427              0.00114 ** 
-## CityElmhurst                 -1.0037     0.4709  -2.131              0.03738 *  
-## CityFlushing                 -1.1334     0.4276  -2.651              0.01038 *  
-## CityForest Hills             -0.9790     0.5428  -1.804              0.07659 .  
-## CityFresh Meadows            -0.4075     0.4518  -0.902              0.37089    
-## CityJackson Heights          -0.1618     0.6574  -0.246              0.80647    
-## CityNew York                  0.1178     0.5510   0.214              0.83149    
-## CityQueens                   -0.7002     0.4608  -1.520              0.13411    
-## CityRego Park                -1.1618     0.6574  -1.767              0.08255 .  
-## Creperies_ind1               -1.3989     0.4500  -3.109              0.00293 ** 
-## Taiwanese_ind1                0.4680     0.2265   2.066              0.04338 *  
-## Juice.Bars...Smoothies_ind1  -0.3063     0.1493  -2.052              0.04480 *  
+##                             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                   5.1026     0.4282  11.917  &lt; 2e-16 ***
+## Authenticity1                -0.4408     0.1286  -3.427  0.00114 ** 
+## CityElmhurst                 -1.0037     0.4709  -2.131  0.03738 *  
+## CityFlushing                 -1.1334     0.4276  -2.651  0.01038 *  
+## CityForest Hills             -0.9790     0.5428  -1.804  0.07659 .  
+## CityFresh Meadows            -0.4075     0.4518  -0.902  0.37089    
+## CityJackson Heights          -0.1618     0.6574  -0.246  0.80647    
+## CityNew York                  0.1178     0.5510   0.214  0.83149    
+## CityQueens                   -0.7002     0.4608  -1.520  0.13411    
+## CityRego Park                -1.1618     0.6574  -1.767  0.08255 .  
+## Creperies_ind1               -1.3989     0.4500  -3.109  0.00293 ** 
+## Taiwanese_ind1                0.4680     0.2265   2.066  0.04338 *  
+## Juice.Bars...Smoothies_ind1  -0.3063     0.1493  -2.052  0.04480 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -195,8 +195,18 @@
 <div id="random-forest-model" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Random Forest Model<a href="methodology-and-results.html#random-forest-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>While random forest models are generally used for prediction, we used their ability to assess variable importance as a comparison point for the linear regression model. Our feature ranking was determined by the percent increase in the mean squared error (MSE). We assessed the variable importance of our predictive model output with a variable called “random”, seen in the plots below.</p>
-<p>The Raleigh plot of variable importance is displayed below:
-<img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The Raleigh plot of variable importance is displayed below:</p>
+<pre><code>## randomForest 4.7-1.1</code></pre>
+<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;randomForest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     combine</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     margin</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>The top ten important variables for the predictive model in Raleigh were similar to the linear regression model. Of the three explanatory variables of the linear regression (juice bar/smoothie indicator, Asian fusion indicator, coffee/tea indicator), only juice bar/smoothie appeared before the random variable. A high overlap between explanatory and predictor variables allows us to infer that there are similar attributes that go into forming and retaining a good Raleigh boba shop. These include:</p>
 <ul>
 <li><p>Having a variety of options, such as smoothies and juices.</p></li>
@@ -212,8 +222,8 @@
 </div>
 <div id="visualization" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Visualization<a href="methodology-and-results.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature “city” in the data set indicated that Raleigh’s n = 4 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model. The variable selection model displayed the most significant explanatory variables, indicating a gap in features between locations.</p>
-<p>The random forest model confirmed that the “city” feature was important in mean boba shop rating outcomes, which could be attributed in part to physical shop proximity, as seen on the Tableau dashboard.</p>
+<p>We utilized the visualization platform Tableau to display both Raleigh and NYC boba shops by longitude and latitude. The feature “city” in the data set indicated that Raleigh’s n = 43 boba shops spanned 9 towns, while NYC’s n = 70 boba shops spanned 10 neighborhoods. We noticed that shops in NYC tended to be more concentrated or in closer proximity to each other than shops in Raleigh. This indicates that there was more competition in close proximity in NYC than in Raleigh. This visualization reiterated the results from both the variable selection model and the predictive random forest model, specifically with the random forest model confirming that the “city” feature was important in mean boba shop rating outcomes. We hypothesize this could be attributed in part to physical shop proximity.</p>
+<p>The Tableau visualization, found in the Github repository, reinforced the findings obtained from both the linear regression model and the predictive random forest model. Combined, they highlighted the most impactful features, indicating a distinct underlying difference in features contributing to boba shop ratings on Yelp.</p>
 
 </div>
 </div>
