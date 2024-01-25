@@ -2,7 +2,7 @@
 ## Final Thoughts
 The boxplot of mean ratings created questions around three main takeaways from our project: 
 
- - A significant difference in mean ratings between Raleigh, NC and NYC, NY.
+ - A significant difference in mean ratings between Raleigh, NC and New York City, NY.
 
  - Determined important variables explaining why Raleigh boba shops are rated higher than NYC, using a linear regression model with stepwise selection and AIC metrics.
 
